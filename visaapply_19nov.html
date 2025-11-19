@@ -1,5 +1,32 @@
 <section class="korban-visa">
     <style>
+
+.btn.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--brand-blue);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn.btn-download:hover {
+  background: #163a68; /* 조금 더 어두운 블루 */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.btn.btn-download:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.12);
+}
+
+
       .chip {
   display:inline-flex;
   align-items:center;
@@ -161,7 +188,7 @@
   </p>
 
   <div class="btn-row">
-    <!-- ① 양식 다운로드: 필요시 드라이브 폴더/파일 링크로 교체 -->
+   
     <a class="btn btn-download"  id="korbanFormBtn" rel="noopener">
       <!-- 다운 아이콘 -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -1182,7 +1209,7 @@ document.getElementById("testAutoFillBtn")?.addEventListener("click", autoFillTe
     </script>
     
     
-        <button id="kaf-paybtn" class="kaf-paybtn" disabled>결제하기</button>
+        <button id="kaf-paybtn" class="kaf-paybtn" disabled>비자 신청하기</button>
       </div>
     </div>
   </section>
@@ -1203,6 +1230,53 @@ document.getElementById("testAutoFillBtn")?.addEventListener("click", autoFillTe
     const applVisaSel = document.getElementById('f-visa');
 
 const bizFields   = document.getElementById('biz-fields');
+   // ===== 배송 주소 복사: 거주지 / 회사 주소 =====
+   const homeCopyChk   = document.getElementById('f-copy-home');
+    const officeCopyChk = document.getElementById('f-copy-office');
+
+ // 🏠 거주지 주소와 동일
+ homeCopyChk?.addEventListener('change', (e) => {
+      if (!e.target.checked) return;
+
+      // 다른 옵션 해제
+      if (officeCopyChk) officeCopyChk.checked = false;
+
+      const addrHome = document.getElementById('f-addrEn')?.value.trim() || '';
+      const recvAddrLine = document.getElementById('f-recvAddrLine');
+      const recvAddr     = document.getElementById('f-recvAddr');
+
+      if (addrHome) {
+        if (recvAddrLine) recvAddrLine.value = addrHome;
+        if (recvAddr)     recvAddr.value     = addrHome;
+      }
+    });
+
+    // 🏢 회사주소로 배송
+    officeCopyChk?.addEventListener('change', (e) => {
+      if (!e.target.checked) return;
+
+      // 다른 옵션 해제
+      if (homeCopyChk) homeCopyChk.checked = false;
+
+      const coAddr  = document.getElementById('f-coAddr')?.value.trim() || '';
+      const coName  = document.getElementById('f-co')?.value.trim() || '';
+      const coPhone = document.getElementById('f-coPhone')?.value.trim() || '';
+
+      const recvAddrLine = document.getElementById('f-recvAddrLine');
+      const recvAddr     = document.getElementById('f-recvAddr');
+      const recvName     = document.getElementById('f-recvName');
+      const recvPhone    = document.getElementById('f-recvPhone');
+
+      // 주소 복사
+      if (coAddr) {
+        if (recvAddrLine) recvAddrLine.value = coAddr;
+        if (recvAddr)     recvAddr.value     = coAddr;
+      }
+      // 수령인/연락처도 회사 정보로 세팅 (있을 때만)
+      if (coName && recvName)   recvName.value  = coName;
+      if (coPhone && recvPhone) recvPhone.value = coPhone;
+    });
+
 
 applVisaSel?.addEventListener('change', (e) => {
   const val = e.target.value;
