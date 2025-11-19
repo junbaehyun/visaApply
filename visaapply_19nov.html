@@ -1313,6 +1313,10 @@ applVisaSel?.addEventListener('change', (e) => {
   } else {
     bizFields.style.display = 'none';
   }
+    // 🔹 비자 종류 바뀔 때마다 합계 다시 계산
+    if (window.KORBAN_updateSummary) {
+    window.KORBAN_updateSummary();
+  }
 });
 
     // === 요약 계산 요소 ===
@@ -1577,7 +1581,10 @@ korbanFormBtn?.addEventListener('click', () => {
         renderDownloadBar(selectedSku);
         syncApplVisaFromProduct(selectedSku); // 🔄 상품 선택 시 발급자 섹션 동기화
   
-        updateSummaryNow(); // ✅ 선택 즉시 금액 갱신
+        if (window.KORBAN_updateSummary) {
+      window.KORBAN_updateSummary();
+    }
+    scrollToApplyForm();
             // ⭐ 상품 선택 후 아래 신청서 섹션으로 이동 + 하이라이트
     scrollToApplyForm();
       });
@@ -1611,7 +1618,12 @@ applyBtn?.addEventListener('click', () => {
 });
   
     // --- 배송방법 변경 시 요약 갱신
-    recvSel?.addEventListener('change', updateSummaryNow);
+    recvSel?.addEventListener('change', () => {
+  if (window.KORBAN_updateSummary) {
+    window.KORBAN_updateSummary();
+  }
+});
+
   
     // --- 제출 (변경 없음)
     async function submitPayload(payload) {
@@ -1877,6 +1889,16 @@ applyBtn?.addEventListener('click', () => {
           </div>
         </div>
 
+           <div class="kaf-grid">
+      <div class="kaf-label">비자수령방법</div>
+      <div class="kaf-field">
+        <select id="kaf-recv" class="kaf-select">
+          <option value="ems5000">우체국익일특급비용 (5000)</option>
+          <option value="pickup0">직접 방문 수령 (0)</option>
+        </select>
+      </div>
+    </div>
+
         <div class="kaf-grid">
           <div class="kaf-label">거주지 주소(한/영)</div>
           <div class="kaf-field kaf-row">
@@ -2015,23 +2037,56 @@ applyBtn?.addEventListener('click', () => {
   }
 
   function updateSummary(){
-    const people = applicants.length;
-    const visaSum= applicants.reduce((s,a)=>s+(a.price||0),0);
-    const shipCount = (!people) ? 0 : (bundleEl?.checked ? 1 : people);
-    const ship = shipCount * SHIP_FEE;
-    const vat  = Math.round((visaSum + ship) * 0.1);
-    const total= visaSum + ship + vat;
+    // 🔹 1) 기본 발급자(비자 발급 받는 분 1) 정보
+    const mainVisaSel = document.getElementById('f-visa');
+    let mainCount = 0;
+    let mainVisaPrice = 0;
 
-    sumCount.textContent = `${people}명`;
-    sumVisa.textContent  = `${visaSum.toLocaleString()}원`;
-    sumShip.textContent  = `${ship.toLocaleString()}원`;
-    sumVat.textContent   = `${vat.toLocaleString()}원`;
-    sumTotal.textContent = `${total.toLocaleString()}원`;
+    if (mainVisaSel && mainVisaSel.value) {
+      const code = mainVisaSel.value;        // tourist / bizSingle / bizMulti
+      const info = VISA[code];
+      if (info) {
+        mainCount = 1;                       // 기본 사람 1명
+        mainVisaPrice = info.price || 0;     // 그 사람의 비자 금액
+      }
+    }
 
-    // 결제 버튼 잠금 해제 조건(예시): 1명 이상 & 각자 비자 선택됨
-    const ready = people>0 && applicants.every(a=>a.visa);
- 
+    // 🔹 2) 추가 발급자들(발급자 2, 3, ...)
+    const extraCount   = applicants.length;
+    const extraVisaSum = applicants.reduce((s,a)=> s + (a.price || 0), 0);
+
+    // 🔹 3) 총 인원 / 비자 수수료 합계
+    const people  = mainCount + extraCount;
+    const visaSum = mainVisaPrice + extraVisaSum;
+
+    // 🔹 4) 배송비 계산
+    // - 우체국(ems5000) 선택 시만 1회당 5,000원
+    // - 묶음배송 체크 시 → 인원과 상관없이 1회만
+    // - 직접 방문(pickup0) → 0원
+    const unitShipFee =
+      (recvSel && recvSel.value === 'ems5000') ? SHIP_FEE : 0;
+
+    const shipCount =
+      (!people || unitShipFee === 0)
+        ? 0
+        : (bundleEl?.checked ? 1 : people);
+
+    const ship  = shipCount * unitShipFee;
+    const vat   = Math.round((visaSum + ship) * 0.1);
+    const total = visaSum + ship + vat;
+
+    // 🔹 5) 화면 반영
+    if (sumCount) sumCount.textContent = `${people}명`;
+    if (sumVisa)  sumVisa.textContent  = `${visaSum.toLocaleString()}원`;
+    if (sumShip)  sumShip.textContent  = `${ship.toLocaleString()}원`;
+    if (sumVat)   sumVat.textContent   = `${vat.toLocaleString()}원`;
+    if (sumTotal) sumTotal.textContent = `${total.toLocaleString()}원`;
   }
+
+  // 🔹 전역에서 부를 수 있게 export
+  window.KORBAN_updateSummary = updateSummary;
+
+
 
   // 결제 버튼 클릭 시 payload에 applicants 포함(당신의 기존 submit에 합치면 됨)
   const oldHandler = window.__kaf_old_submit;
