@@ -731,8 +731,9 @@
 
       <!-- 신청자와 동일 체크 -->
       <label class="k-badge-sm">
-        <input type="checkbox" class="f-copy"> 신청자와 동일
+        <input type="checkbox" id="mainCopyCheckbox" class="f-copy"> 신청자와 동일
       </label>
+      
     </div>
   </div>
 
@@ -1028,6 +1029,7 @@
 
 
 // ⭐ TEST 자동입력: 신청자 정보 + 비자발급 받는 분 1 둘 다 채우기
+// ⭐ TEST 자동입력: 신청자 정보 + 비자발급 받는 분 1 + 추가 발급자 카드들 자동입력
 function autoFillTestData() {
   const today = new Date().toISOString().slice(0, 10); // yyyy-mm-dd
 
@@ -1070,7 +1072,7 @@ function autoFillTestData() {
   // 비자 종류: 관광비자 선택
   if (visaSel) {
     visaSel.value = 'tourist';
-    // 혹시 change 이벤트에 맞춰 biz-fields 토글 같은 거 쓰고 있으면 살리기
+    // 비즈니스 필드 토글 등 기존 change 로직 살리기
     visaSel.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
@@ -1095,7 +1097,74 @@ function autoFillTestData() {
   if (fRecvAddr)     fRecvAddr.value     = '서울시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호';
 
   // =====================
-  // 3) 하이라이트 효과
+  // 3) 추가 발급자 카드들(.applicant-card) 자동입력
+  // =====================
+  const applicantCards = document.querySelectorAll('#applicant-list .applicant-card');
+
+  applicantCards.forEach((card, index) => {
+    // 번호별로 살짝 이름만 다르게
+    const no = index + 2; // 2번, 3번, ...
+
+    const cVisa    = card.querySelector('.f-visa');
+    const cNameKo  = card.querySelector('.f-nameKo');
+    const cNameEn  = card.querySelector('.f-nameEn');
+    const cPhone   = card.querySelector('.f-phone');
+    const cEmail   = card.querySelector('.f-email');
+    const cAddrKo  = card.querySelector('.f-addrKo');
+    const cAddrEn  = card.querySelector('.f-addrEn');
+    const cTrip    = card.querySelector('.f-trip');
+    const cArrive  = card.querySelector('.f-arrive');
+    const cPpNo    = card.querySelector('.f-ppNo');
+    const cPpExp   = card.querySelector('.f-ppExp');
+    const cMarital = card.querySelector('.f-marital');
+    const cCo      = card.querySelector('.f-co');
+    const cCoPhone = card.querySelector('.f-coPhone');
+    const cCoAddr  = card.querySelector('.f-coAddr');
+    const cRecvName  = card.querySelector('.f-recvName');
+    const cRecvPhone = card.querySelector('.f-recvPhone');
+    const cRecvAddr  = card.querySelector('.f-recvAddr');
+
+    // 비자: 일단 관광비자
+    if (cVisa) {
+      cVisa.value = 'tourist';
+    }
+
+    if (cNameKo)  cNameKo.value  = `테스트 신청자 ${no}`;
+    if (cNameEn)  cNameEn.value  = `TEST USER ${no}`;
+    if (cPhone)   cPhone.value   = '010-1234-5678';
+    if (cEmail)   cEmail.value   = `test${no}@example.com`;
+    if (cAddrKo)  cAddrKo.value  = '서울시 강서구 마곡동';
+    if (cAddrEn)  cAddrEn.value  = 'Magok-dong, Gangseo-gu, Seoul, Korea';
+
+    if (cTrip)    cTrip.value    = '11/02~11/08';
+    if (cArrive)  cArrive.value  = today;
+
+    if (cPpNo)    cPpNo.value    = `M12345${no}`;
+    if (cPpExp)   cPpExp.value   = today;
+    if (cMarital) cMarital.value = 'single';
+
+    if (cCo)      cCo.value      = 'KORBAN Consulting';
+    if (cCoPhone) cCoPhone.value = '02-2658-4006';
+    if (cCoAddr)  cCoAddr.value  = 'Magok Techno Tower 2, #610, Seoul';
+
+    if (cRecvName)  cRecvName.value  = `테스트 수령인 ${no}`;
+    if (cRecvPhone) cRecvPhone.value = '010-1234-5678';
+    if (cRecvAddr)  cRecvAddr.value  = '서울시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호';
+
+    // 👉 applicants 배열/요약 갱신을 위해 change 이벤트 한 번 쏴주기
+    if (cVisa) {
+      cVisa.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // 하이라이트 효과 (옵션)
+    card.classList.add('k-product-highlight');
+    setTimeout(() => {
+      card.classList.remove('k-product-highlight');
+    }, 1500);
+  });
+
+  // =====================
+  // 4) 1번 카드도 잠깐 하이라이트
   // =====================
   const applSection = document.getElementById('appl-active');
   if (applSection) {
@@ -1106,7 +1175,7 @@ function autoFillTestData() {
   }
 }
 
-// 버튼 클릭 이벤트
+// 버튼 클릭 이벤트 (이 부분은 그대로 두고, 혹시 없으면 추가)
 document.getElementById("testAutoFillBtn")?.addEventListener("click", autoFillTestData);
 
 
@@ -1154,11 +1223,10 @@ applVisaSel?.addEventListener('change', (e) => {
     const sumTotalEl = document.getElementById('sum-total');
     const recvSel = document.getElementById('kaf-recv');
 
-      // ===== '신청자 동일' 체크 시 위 신청자 정보 → 발급자 1로 복사 =====
-  const sameApplCheckbox = document.querySelector('#appl-active .f-copy');
+ // ===== '신청자 동일' 체크 시 위 신청자 정보 → 발급자 1로 복사 =====
+const sameApplCheckbox = document.getElementById('mainCopyCheckbox');
 
 sameApplCheckbox?.addEventListener('change', (e) => {
-  // 체크 되었을 때만 동작
   if (!e.target.checked) return;
 
   // ─ 위쪽 신청자 정보 ─
@@ -1177,19 +1245,14 @@ sameApplCheckbox?.addEventListener('change', (e) => {
   const fRecvName  = document.getElementById('f-recvName');
   const fRecvPhone = document.getElementById('f-recvPhone');
 
-  // 이름: 한글이지만 일단 그대로 복사 (나중에 영문으로 수정 가능)
   if (fNameEn && applName)  fNameEn.value  = applName;
-
-  // 연락처 / 이메일
   if (fPhone && fullPhone)  fPhone.value   = fullPhone;
   if (fEmail && applEmail)  fEmail.value   = applEmail;
 
-  // 배송 수령인 정보도 같이 채워주기
   if (fRecvName && applName)   fRecvName.value  = applName;
   if (fRecvPhone && fullPhone) fRecvPhone.value = fullPhone;
 });
 
-  
     // --- endpoints
     const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzCNgVpwQ60auUiKTjtujeLJ7Gz8ihi7isbuOkw87fSgC31a4dX8qsEX9exEFUarfcn7w/exec';
   
