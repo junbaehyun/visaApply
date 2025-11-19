@@ -1,0 +1,1819 @@
+<section class="korban-visa">
+    <style>
+      .chip {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  background:#f3f4f6;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+  margin-right:6px;
+}
+.chip input {
+  accent-color: var(--brand-blue);
+}
+
+      
+      .korban-visa{
+        --brand-blue:#1f4b85; --accent-green:#00a36a; --accent-orange:#ff6a00;
+        --ink:#111827; --muted:#6b7280; --bg:#fff; --card:#f9fafb;
+        --line:#e5e7eb; --line-2:#eef0f2;
+        font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,Apple SD Gothic Neo,Helvetica,Arial,sans-serif;
+        color:var(--ink); background:var(--bg); max-width:980px; margin:28px auto; padding:0 16px;
+      }
+      .k-brandbar{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+      .k-visa-logo{width:36px;height:36px}
+      .k-brandtxt{font-weight:800;letter-spacing:.2px;color:var(--brand-blue)}
+      .k-pill{font-size:12px;color:#fff;background:var(--brand-blue);padding:4px 10px;border-radius:999px;margin-left:8px}
+  
+      .k-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);margin-top:18px}
+      .k-title{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:800;font-size:22px}
+      .k-list{display:grid;gap:14px;margin:16px 0;padding:0;list-style:none}
+      .k-li{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 14px;display:grid;gap:6px}
+      .k-li h3{margin:0;font-size:16px;font-weight:800}
+      .k-li p{margin:0;color:var(--muted);font-size:13.5px}
+      .k-download{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:var(--brand-blue);color:#fff;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:700}
+  
+  
+    </style>
+  
+    <style>
+    .k-dlbar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+    .k-dlbtn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#1f4b85;color:#fff;border:none;border-radius:10px;
+      padding:9px 13px;font-weight:800;font-size:14px;cursor:pointer;
+      text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,.08)
+    }
+    .k-dlbtn:hover{filter:brightness(.96)}
+    .k-dlico{width:18px;height:18px}
+  </style>
+  
+    <!-- Brand bar -->
+    <div class="k-brandbar">
+      <svg class="k-visa-logo" viewBox="0 0 48 48" fill="none">
+        <rect x="6" y="8" width="24" height="32" rx="3" fill="#1f4b85" opacity=".12"/>
+        <rect x="6" y="8" width="24" height="32" rx="3" stroke="#1f4b85" stroke-width="2"/>
+        <circle cx="18" cy="18" r="6" stroke="#1f4b85" stroke-width="2"/>
+        <path d="M8 30h20" stroke="#00a36a" stroke-width="2"/>
+        <path d="M30 28l12-4M30 28l6 6M30 28l-2 8" stroke="#ff6a00" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="k-brandtxt">KORBAN VISA</div>
+      <span class="k-pill">VISA SERVICE</span>
+    </div>
+  <section class="visa-download">
+  <style>
+    
+    .visa-download{
+      --brand-blue:#1f4b85;          /* 다운로드 버튼 */
+      --brand-blue-hover:#163a66;
+      --kakao-yellow:#FEE500;        /* 카카오 버튼 */
+      --kakao-brown:#3C1E1E;
+      --ink:#111827;
+      --muted:#374151;
+      --border:#e5e7eb;
+      --soft:#f9fafb;
+      --panel:#ffffff;
+      max-width:900px;margin:3px auto;padding:36px 20px;text-align:center;
+      background:var(--soft);border:1px solid var(--border);border-radius:16px;
+      font-family:system-ui,-apple-system,Noto Sans KR,Roboto,sans-serif
+    }
+      .k-product-highlight {
+  border-color: var(--accent-orange) !important;
+  box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.4);
+  background: #fff7ec;
+  animation: kVisaBlink 0.5s ease-in-out 0s 3;
+}
+
+@keyframes kVisaBlink {
+  0%   { box-shadow: 0 0 0 0 rgba(255,106,0,0.0); }
+  50%  { box-shadow: 0 0 10px 2px rgba(255,106,0,0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(255,106,0,0.0); }
+}
+    
+    .visa-download h2{margin:0 0 10px;font-size:30px;font-weight:900;color:#111827;letter-spacing:-.2px}
+    .visa-download h2 .accent{display:block;color:var(--brand-blue);font-size:34px}
+    .visa-download p{margin:10px 0 20px;font-size:15px;line-height:1.7;color:var(--muted)}
+
+    .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:12px;
+         font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,.08);transition:.18s ease; border:1px solid transparent}
+    .btn svg{width:18px;height:18px}
+    /* 다운로드(블루) */
+    .btn-download{background:var(--brand-blue);color:#fff}
+    .btn-download:hover{background:var(--brand-blue-hover);transform:translateY(-1px)}
+    /* 카카오(노란색) */
+    .btn-kakao{background:var(--kakao-yellow);color:var(--kakao-brown);border-color:#e6d200}
+    .btn-kakao:hover{filter:brightness(.98);transform:translateY(-1px)}
+
+    /* ── 추가: 바로작성 카드 & 버튼 ───────────────────────── */
+    .inline-card{
+      background:var(--panel); border:1px solid var(--border); border-radius:14px;
+      padding:16px 18px; margin-top:14px; text-align:left;
+      box-shadow:0 6px 18px rgba(2,6,23,.05); max-width:780px; margin-left:auto; margin-right:auto;
+    }
+    .inline-card .ic-head{display:flex; align-items:center; gap:10px; margin-bottom:6px}
+    .inline-card .ic-ico{width:22px;height:22px;color:var(--brand-blue)}
+    .inline-card p{margin:6px 0 12px;color:#374151}
+    .inline-card .btn-row{justify-content:flex-start; margin-top:6px}
+
+    .btn-live{
+      background:#fff; color:var(--brand-blue); border-color:#d7e2f3;
+    }
+    .btn-live:hover{background:#f6f9ff; transform:translateY(-1px)}
+    .sub-hint{font-size:13px;color:#6b7280;margin-top:4px}
+    .vd-sep{height:1px;background:linear-gradient(90deg,transparent,#e9edf3,transparent);margin:14px 0}
+    @media (max-width:560px){
+      .inline-card{padding:14px}
+      .inline-card .btn-row{justify-content:center}
+    }
+  /* 🚫 Make sure .visa-download never becomes a scroll container */
+.visa-download{
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  -webkit-overflow-scrolling: auto !important; /* iOS: disable momentum scroll on the element */
+  overscroll-behavior: auto !important;        /* allow scroll to propagate to the page */
+  scroll-snap-type: none !important;           /* if a global snap is applied */
+  touch-action: auto !important;               /* if a global touch lock exists */
+}
+
+/* In case a wrapper around it is forcing a scroll area */
+.visa-download:where(.section, .panel, .card){
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* Safety: children shouldn’t create their own scroll areas either */
+.visa-download *{
+  max-height: none !important;
+  overflow: visible !important;
+  -webkit-overflow-scrolling: auto !important;
+}
+  </style>
+
+  <h2><span class="accent">비자 신청하기 </span></h2>
+  <br/>
+  <p>
+    아래 <b>코반 비자 신청서</b> 작성 후 <b>카카오 채팅</b>으로 <b>'신청완료'</b> 회신 부탁드립니다.
+  </p>
+
+  <div class="btn-row">
+    <!-- ① 양식 다운로드: 필요시 드라이브 폴더/파일 링크로 교체 -->
+    <a class="btn btn-download"  id="korbanFormBtn" rel="noopener">
+      <!-- 다운 아이콘 -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-width="2" stroke-linecap="round"/>
+        <path d="M7 10l5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 15V3" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      코반 신청서
+    </a>
+
+    <!-- ② 카카오 채팅 연결: 채널/오픈채팅 URL로 교체 -->
+    <a class="btn btn-kakao" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
+      <!-- 말풍선 아이콘 -->
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+      </svg>
+      카카오 채팅 연결
+    </a>
+  </div>
+
+  <div class="sub-hint">(신청 인원에 맞춰 <b>각 인원별</b>로 작성 바랍니다.)</div>
+
+  <div class="vd-sep" aria-hidden="true"></div>
+
+ 
+</section>
+
+   <!-- ========= 방글라데시비자 정보 탭 (공지/협정/입국/진행과정) ========= -->
+  <section class="k-info-tabs" aria-label="방글라데시비자 안내">
+    <style>
+      .k-info-tabs{margin-top:10px}
+      .k-info-tabs .tabbar{display:flex;gap:28px;border-bottom:1px solid var(--line);margin:10px 0 16px}
+      .k-info-tabs .tabbar button{
+        background:none;border:none;padding:12px 2px 10px;font-weight:800;cursor:pointer;
+        color:#374151; position:relative
+      }
+      .k-info-tabs .tabbar button.active{color:var(--brand-blue)}
+      .k-info-tabs .tabbar button.active::after{
+        content:""; position:absolute; left:0; right:0; bottom:-1px; height:3px;
+        background:var(--brand-blue); border-radius:99px;
+      }
+      .k-pane-wrap{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:18px}
+      .k-pane{display:none}
+      .k-pane.active{display:block}
+      .k-flag{width:44px;height:30px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;margin-right:10px}
+      .k-note{font-size:14px;color:#374151;line-height:1.7}
+      .k-note b{font-weight:900}
+      /* 진행과정(타임라인) */
+      .k-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:center}
+      .k-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;align-items:center;gap:10px}
+      .k-step h4{margin:0;font-size:14px;font-weight:900;color:#111827}
+      .k-step p{margin:2px 0 0;font-size:12.5px;color:#6b7280}
+      .k-arrow{display:flex;align-items:center;justify-content:center;color:#9aa3af}
+      .k-step .ico{width:22px;height:22px;color:var(--brand-blue)}
+      @media (max-width:860px){
+        .k-steps{grid-template-columns:1fr;gap:8px}
+        .k-arrow{display:none}
+      }
+    </style>
+  
+    <!-- 탭 바 -->
+    <div class="tabbar" role="tablist">
+      <button class="tabbtn active" data-tab="notice" role="tab" aria-controls="k-tab-notice">공지사항</button>
+      <button class="tabbtn" data-tab="agreement" role="tab" aria-controls="k-tab-agreement">비자 사증 협정</button>
+      <button class="tabbtn" data-tab="entry" role="tab" aria-controls="k-tab-entry">입국정보</button>
+      <button class="tabbtn" data-tab="process" role="tab" aria-controls="k-tab-process">예약진행과정</button>
+      <button class="tabbtn" data-tab="korban" role="tab" aria-controls="k-tab-korban">Why</button>
+
+    </div>
+  
+    <div class="k-pane-wrap">
+      <!-- 공지사항 -->
+      <div id="k-tab-notice" class="k-pane active" role="tabpanel">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <!-- 방글라데시 국기 -->
+          <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+          </svg>
+          <div class="k-note">
+            <p><b>&lt;방글라데시 비자&gt;</b></p>
+            <p>○ 방글라데시 비자 발급은 대사관 심사 후 발급되며, 통상 5~7 영업일이 소요됩니다.<br/>
+               ○ 비자 발급 후, 여권은 등기우편으로 발송해 드리며, 퀵서비스 및 방문수령도 가능합니다.<br/>
+               ○ 비지니스 단수의 경우 통상 30일 체류 가능하며 그 이상은 명확한 이유가 필요합니다.<br/>
+               ○ 5년이상된 여권의 경우 제출하는 실물 사진이 같을 시 최근 사진 요청 될 수 있습니다.   
+          </div>
+        </div>
+      </div>
+  
+      <!-- 비자 사증 협정 -->
+      <div id="k-tab-agreement" class="k-pane" role="tabpanel">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+          </svg>
+          <div class="k-note">
+            일반[전자]여권을 소지한 대한민국 국적자는 입국 전 비자를 취득해야 합니다.<br/>
+            외교관·관용여권을 소지한 대한민국 국적자는 90일 비자협정체결 국가로 비자 없이 입국이 가능합니다.
+          </div>
+        </div>
+      </div>
+
+     <!-- Why KORBAN -->
+<div id="k-tab-korban" class="k-pane" role="tabpanel">
+  <div style="display:flex;align-items:flex-start;gap:12px">
+    <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="16" height="10" fill="#006a4e"/>
+      <circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+    </svg>
+
+    <div class="k-note" style="line-height:1.6;font-size:15px;color:#111;">
+      <h3 style="margin:0 0 10px;font-weight:700;color:#1f4b85;"> 왜 방글라데시 비자는 ‘코반투어’일까?</h3>
+
+      <p><strong>💰 업계 최저가:</strong> 코반투어는 방글라데시 비자 신청 <b>업계 최저 가격</b>을 유지하고 있습니다.<br>
+      대사관 납부비용까지 모두 포함된 <b>투명한 금액</b>, 숨겨진 추가비용이 없습니다.</p>
+
+      <p><strong>🧭 전문성과 현지 네트워크:</strong> 코반투어의 모기업 <b>‘코반(KORBAN Consulting)’</b>은
+      방글라데시 정부 및 기업과 <b>ODA·컨설팅 프로젝트를 직접 수행</b>하는 전문기업입니다. 단순 여행사가 아닌 <br>
+        <b>현지 정부·기업 네트워크 기업</b>으로 실제 행정·비자 절차를 가장 잘 이해합니다.</p>
+
+      <p><strong>🤝 신뢰성과 협력:</strong> 코반투어는 <b>방글라데시 비자만 전문적으로 취급</b>하며,
+      여러 기관·법인과의 <b>지속적인 파트너십</b>을 통해 안정적인 프로세스를 구축했습니다.</p>
+
+      <p><strong>🌍 원스톱 지원:</strong> 비자->항공권->공항 픽업->숙박->렌트카/운전사 및 경호인력->미팅어렌지->통번역->컨설팅->방글라데시 행정,회계 대행 등 —
+      <b>방글라데시 진출에 필요한 모든 서비스를 원스톱으로 지원</b>합니다.</p>
+
+      <hr style="margin:16px 0;border:none;border-top:1px solid #ddd;">
+
+     
+
+      <p>
+      코반은 현지에서 직접 <b>살아보고, 사업하고, 부딪혀본 전문가들</b>과 함께합니다.<br>
+      “왜 그렇게 어려운 나라냐”는 질문에, <b>직접 경험으로 답할 수 있는 한국 기업</b>입니다.</p>
+
+     
+    </div>
+  </div>
+</div>
+
+  
+<!-- 입국정보 -->
+<div id="k-tab-entry" class="k-pane" role="tabpanel">
+  <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+    <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+    </svg>
+    <h3 style="font-weight:800;color:#1f4b85;font-size:20px;margin:0;">방글라데시 입국 및 안전 안내</h3>
+  </div>
+
+  <div class="k-entry-info" style="font-family:'Noto Sans KR',sans-serif;line-height:1.65;color:#374151">
+    
+    <!-- 1️⃣ 검역 정보 -->
+    <div style="background:#fff3cd;border:1px solid #ffeeba;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
+      🔸 <strong>2025년 10월 1일 기준</strong>, <b>방글라데시가 중점검역관리지역</b>으로 지정되었습니다.<br/>
+      방글라데시 출발 → 한국 입국 시 반드시 <strong>Q-Code 검역정보 제출</strong>이 필요합니다.<br/>
+      (<a href="https://blog.naver.com/korbangroup/224050085068" target="_blank" rel="noopener" style="color:#1f4b85;">그래서 어떻게 하나요?</a>)
+    </div>
+
+    <!-- 2️⃣ 건강 정보 -->
+    <div style="background:#fef9f9;border:1px solid #fecaca;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
+      🦟 <strong>뎅기열 감염 주의 안내</strong> (주방글라데시대사관, 2025.10.05)<br/>
+      2025년 10월 기준, 방글라데시 내 <strong>뎅기열 감염자 48,865명</strong>, <strong>사망자 203명</strong> 보고.<br/>
+      고열·두통·근육통·피부 발진 시 즉시 전문의 상담 권장.<br/>
+      ⚠️ <b>아스피린·이부프로펜 계열 약물은 복용 금지</b> — 출혈 위험.<br/>
+      대신 타이레놀(아세트아미노펜) 계열 약물 복용 권장.<br/>
+      <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
+        🏨 한국어 가능 직원 상주 방글라데시 코반 숙소 문의
+      </a>
+    </div>
+
+    <!-- 3️⃣ 치안 정보 -->
+    <div style="background:#f8fafc;border:1px solid #cbd5e1;padding:14px 18px;border-radius:10px;">
+      🚨 <strong>가지푸르(Gazipur) 지역 강력범죄 급증 관련 유의</strong> (주방글라데시대사관, 2025.08.17)<br/>
+      가지푸르 일대에서 강력범죄가 급증 중이며, <b>공항~가지푸르 BRT 공사 구간</b> 등은 위험 지역으로 지정되었습니다.<br/>
+      ▫ 외출 시 귀중품 최소화, 현금·야간 외출 자제<br/>
+      ▫ 차량 이동 시 위치 공유 금지 및 택시 이용 시 신원 확인<br/>
+      ▫ 현지 경찰·대사관 지침 준수 필수<br/>
+      <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
+        🚗 안전한 코반 공항 에스코트(의전), 공항 픽업·운전사·렌트카·경호 문의
+      </a>
+    </div>
+  </div>
+</div>
+
+
+  
+      <!-- 예약진행과정 (아이콘 포함) -->
+      <!-- ===== 예약진행과정 (번호 + 아이콘 + 카카오 채널 버튼) ===== -->
+  <div id="k-tab-process" class="k-pane" role="tabpanel">
+    <style>
+        .k-steps{
+          display:grid; gap:14px;
+          grid-template-columns:repeat(4,1fr);
+        }
+        @media (max-width:1024px){ .k-steps{grid-template-columns:repeat(2,1fr);} }
+        @media (max-width:640px){ .k-steps{grid-template-columns:1fr;} }
+      
+        .k-step{
+          background:#fff; border:1px solid var(--line); border-radius:14px;
+          padding:16px; display:flex; gap:12px; align-items:flex-start;
+          box-shadow:0 1px 2px rgba(0,0,0,.04);
+        }
+        .k-step .num{
+          min-width:28px; height:28px; border-radius:50%;
+          background:var(--brand-blue); color:#fff; font-weight:900; font-size:12px;
+          display:inline-flex; align-items:center; justify-content:center; margin-top:2px;
+        }
+        .k-step .head{display:flex; align-items:center; gap:8px; margin-bottom:6px}
+        .k-step h4{margin:0; font-size:15px; font-weight:900; color:#111827}
+        .k-step .ico{width:22px; height:22px; color:var(--brand-blue)}
+        .k-step p{margin:0; font-size:13.5px; color:#374151; line-height:1.6}
+      
+        /* 카카오 버튼 강조 */
+        .btn-kakao-mini{
+          display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+          padding:9px 12px; border-radius:10px; background:#FEE500; color:#3C1E1E;
+          border:1px solid #e6d200; font-weight:800; font-size:12.5px; text-decoration:none;
+        }
+        .btn-kakao-mini svg{width:16px; height:16px}
+      
+        /* 구분 화살표 제거 */
+        .k-arrow{display:none}
+      
+        /* 주소/안내 박스 */
+        .k-tip{
+          margin-top:14px; background:#f9fafb; border:1px dashed var(--line);
+          border-radius:12px; padding:12px 14px; color:#374151; font-size:13.5px;
+        }
+        .k-tip b{font-weight:900; color:#111827}
+        .k-tip .addr{
+          display:block; margin-top:6px;
+          font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px;
+        }
+      
+        .k-note{margin-top:8px; color:#6b7280; font-size:12.5px}
+      </style>
+      
+  
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+      <!-- 방글라데시 국기 -->
+      <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+      </svg>
+      <h3 style="margin:0;font-size:16px;color:#111827">예약 진행 단계</h3>
+    </div>
+  
+   
+<div class="k-steps v2" role="list">
+    <!-- 1 -->
+    <div class="k-step card" role="listitem">
+      <span class="num">1</span>
+      <div>
+        <div class="head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h2"></path>
+          </svg>
+          <h4>비자 신청 접수</h4>
+        </div>
+        <p>신청서 작성 → 카카오채널 전송</p>
+        <a class="btn-kakao-mini" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+          </svg>
+          코반투어 카카오 채팅
+        </a>
+      </div>
+    </div>
+  
+    <!-- 2 -->
+    <div class="k-step card" role="listitem">
+      <span class="num">2</span>
+      <div>
+        <div class="head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <h4>여권 & 사진 제출</h4>
+        </div>
+        <p>여권 <b>원본</b>과 <b>여권 사진</b>을 <b>등기우편</b>으로 보내주세요.<br>※ 디지털 여권 사진 제공 시 <b>처리 속도↑</b></p>
+      </div>
+    </div>
+  
+    <!-- 3 -->
+    <div class="k-step card" role="listitem">
+      <span class="num">3</span>
+      <div>
+        <div class="head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+          </svg>
+          <h4>비자 유형별 서류 제출</h4>
+        </div>
+        <p>신청 비자에 필요한 서류를 채널로 전송해 주세요.</p>
+      </div>
+    </div>
+  
+    <!-- 4 -->
+    <div class="k-step card" role="listitem">
+      <span class="num">4</span>
+      <div>
+        <div class="head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <path d="M3.27 6.96L12 12l8.73-5.04"></path><path d="M12 22V12"></path>
+          </svg>
+          <h4>비자 발급</h4>
+        </div>
+        <p>택배/방문 수령</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 주소 & 소요일 안내 -->
+  <div class="k-tip" role="note" aria-label="발송 주소 및 소요일 안내">
+    <b>여권 보내실 곳</b>
+    <span class="addr">📍 서울특별시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호 (우)07631<br>
+    받는이: 코반 비자 담당자 앞 · 전화번호: 02-2658-4006</span>
+  
+    <div class="k-note">
+      * 비자 발급 소요일: 일주일(서류·여권 도착 기준, 공휴일 포함)<br>
+      * 등기 수령: 발급 다음날 수령(등기 비용 별도)
+    </div>
+  </div>
+  </div>
+  
+      </div>
+    
+
+
+
+  
+    <script>
+      // 탭 전환
+      (function(){
+        const btns = document.querySelectorAll('.k-info-tabs .tabbtn');
+        const panes = document.querySelectorAll('.k-info-tabs .k-pane');
+        btns.forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            btns.forEach(b=>b.classList.remove('active'));
+            panes.forEach(p=>p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('k-tab-' + btn.dataset.tab).classList.add('active');
+          });
+        });
+      })();
+    </script>
+  </section>
+  <!-- ========= /방글라데시비자 정보 탭 ========= -->
+  
+  
+    <!-- 상품 선택 -->
+    <div class="k-products" id="k-products">
+      <article class="k-prod" data-sku="tourist" data-price="100000">
+        <h4>관광비자</h4>
+        <div class="k-fe">유효 6개월 · 체류 30일</div>
+        <div class="k-price">₩100,000</div>
+      </article>
+      <article class="k-prod" data-sku="biz-single" data-price="100000">
+        <h4>비즈니스 단수</h4>
+        <div class="k-fe">유효 90일 · 1회 입국</div>
+        <div class="k-price">₩100,000</div>
+      </article>
+      <article class="k-prod" data-sku="biz-multi" data-price="130000">
+        <h4>비즈니스 복수</h4>
+        <div class="k-fe">유효 6–7개월 · 복수입국</div>
+        <div class="k-price">₩130,000</div>
+      </article>
+    </div>
+
+    <style>
+
+/* 신청서 작성 폼 스크롤 마진  - 신청서 작성 버튼 스크롤*/
+#k-apply-form { scroll-margin-top: 96px; }
+      /* 상품 선택 */
+      .k-products{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:12px 0 18px}
+      .k-prod{background:#fff;border:2px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.15s}
+      .k-prod:hover{border-color:var(--brand-blue)}
+      .k-prod h4{margin:0 0 6px;font-size:16px;font-weight:800}
+      .k-fe{color:var(--muted);font-size:13.5px}
+      .k-price{margin-top:10px;font-weight:900;color:var(--brand-blue)}
+      .k-prod.is-selected{background:#eef4ff;border-color:var(--brand-blue);box-shadow:0 0 0 3px rgba(31,75,133,.08) inset}
+      @media (max-width:680px){ .k-products{grid-template-columns:1fr 1fr} }
+      @media (max-width:480px){ .k-products{grid-template-columns:1fr} }
+  
+    /* <!-- Sticky bar --> */
+      .k-sticky{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+      .k-total{font-weight:800}
+      .k-apply{background:var(--brand-blue);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer}
+      .k-apply:disabled{opacity:.5;cursor:not-allowed}
+      
+    </style>
+    
+    <div class="k-sticky">
+      <div class="k-total" id="k-total">선택된 상품: 없음</div>
+      <button class="k-apply" id="k-apply" type="button" disabled hidden>신청서 작성</button>
+    </div>
+  <!-- ✅ 자료 다운로드 버튼 영역 -->
+  <div id="k-dlbar" class="k-dlbar" aria-label="자료 다운로드 버튼 영역"></div>
+  
+    <!-- 제출서류 안내 -->
+    <div id="requirements"></div>
+  
+    
+  
+      <!-- ========= 신청서 작성 이후 펼쳐지는 '비자신청서' UI ========= -->
+  <section id="k-apply-form" class="k-apply-form">
+    <style>
+      .k-apply-form{margin-top:18px}
+      .kaf-card{background:#fff;border:1px solid var(--line);border-radius:16px}
+      .kaf-head{padding:16px 18px;border-bottom:1px solid var(--line);font-size:22px;font-weight:900}
+      .kaf-body{padding:18px}
+      .kaf-table{width:100%;border-collapse:collapse;background:#fafafa;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+      .kaf-table th,.kaf-table td{padding:12px 10px;border-bottom:1px solid #eee;font-size:14px;text-align:left}
+      .kaf-section{margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+      .kaf-section h3{margin:0;padding:12px 14px;background:#f9fafb;border-bottom:1px solid var(--line);font-size:16px;font-weight:900}
+      .kaf-grid{display:grid;grid-template-columns:160px 1fr;align-items:center;border-bottom:1px solid var(--line)}
+      .kaf-grid:last-child{border-bottom:none}
+      .kaf-label{padding:12px 14px;background:#fff;font-weight:700;font-size:14px}
+      .kaf-field{padding:10px}
+      .kaf-input,.kaf-select{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;font-size:14px}
+      .kaf-row{display:flex;gap:8px}
+      .kaf-pin{max-width:200px}
+      .kaf-note{font-size:12.5px;color:#6b7280;margin-top:6px}
+      .kaf-radio{display:flex;gap:24px;flex-wrap:wrap}
+      .kaf-radio label{display:flex;align-items:center;gap:8px;font-weight:700}
+      .kaf-summary{background:#f9fafb;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
+      .kaf-summary .row{display:flex;justify-content:space-between;margin:6px 0;font-size:14px}
+      .kaf-summary .total{background:#fff3d7;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;font-weight:900}
+      .kaf-consent{margin-top:10px;display:flex;gap:10px;align-items:flex-start}
+      .kaf-paybtn{margin-top:16px;background:#5b21b6;border:none;color:#fff;width:100%;padding:16px;border-radius:12px;
+                  font-size:18px;font-weight:900;cursor:pointer}
+      .kaf-paybtn:disabled{opacity:.5;cursor:not-allowed}
+      .k-badge-sm{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px dashed var(--line);font-size:12px}
+      .k-mapbtn{margin-left:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+      @media (max-width:720px){
+        .kaf-grid{grid-template-columns:1fr}
+        .kaf-label{border-bottom:1px solid var(--line)}
+      }
+    </style>
+  
+    <div class="kaf-card">
+      <div class="kaf-head">비자신청서</div>
+     
+      <div class="kaf-body">
+        <!-- 주문 요약 표 -->
+        <table class="kaf-table" id="kaf-summary-table" aria-label="주문 요약">
+          <tr><th>비자</th><th>유효기간</th><th>최대체류기간</th><th>수속기간</th></tr>
+          <tr>
+            <td id="kaf-product-name">[선택한 상품]</td>
+            <td id="kaf-valid">-</td>
+            <td id="kaf-stay">-</td>
+            <td id="kaf-proc">6박7일</td>
+          </tr>
+        </table>
+  
+        <!-- 신청자 정보 -->
+        <div class="kaf-section">
+          <h3>신청자 정보</h3>
+          <div class="kaf-grid">
+            <div class="kaf-label">이름</div>
+            <div class="kaf-field"><input id="kaf-name" class="kaf-input" placeholder="이름"></div>
+          </div>
+          
+          <div class="kaf-grid">
+            <div class="kaf-label">핸드폰</div>
+            <div class="kaf-field kaf-row">
+              <select id="kaf-phone1" class="kaf-select" style="max-width:120px">
+                <option>010</option><option>011</option><option>016</option><option>017</option><option>018</option><option>019</option>
+              </select>
+              <input id="kaf-phone2" class="kaf-input" placeholder="1234" maxlength="4" style="max-width:140px">
+              <input id="kaf-phone3" class="kaf-input" placeholder="5678" maxlength="4" style="max-width:140px">
+            </div>
+          </div>
+          <div class="kaf-grid">
+            <div class="kaf-label">이메일</div>
+            <div class="kaf-field"><input id="kaf-email" type="email" class="kaf-input" placeholder="이메일"></div>
+          </div>
+          <section class="kaf-section" id="receiptSection" style="margin-top:24px;">
+            <h3>세금계산서 / 현금영수증 신청</h3>
+          
+            <!-- 영수증 종류 선택 -->
+            <div class="kaf-grid">
+              <div class="kaf-label">신청 종류</div>
+              <div class="kaf-field">
+                <label class="chip">
+                  <input type="radio" name="receipt_type" value="none" checked />
+                  발행 안함
+                </label>
+                <label class="chip">
+                  <input type="radio" name="receipt_type" value="tax" />
+                  세금계산서 신청
+                </label>
+                <label class="chip">
+                  <input type="radio" name="receipt_type" value="cash" />
+                  현금영수증 신청
+                </label>
+              </div>
+            </div>
+          
+            <!-- 세금계산서용 이메일 -->
+            <div class="kaf-grid" id="taxEmailRow" style="display:none;">
+              <div class="kaf-label">세금계산서 이메일</div>
+              <div class="kaf-field">
+                <input type="email" class="kaf-input" name="tax_email" placeholder="you@example.com" />
+                <div class="kaf-note">제출 후 사업자등록증을 카카오채널로 보내주세요.</div>
+              </div>
+            </div>
+          
+            <!-- 현금영수증용 전화번호 -->
+            <div class="kaf-grid" id="cashPhoneRow" style="display:none;">
+              <div class="kaf-label">현금영수증 번호</div>
+              <div class="kaf-field">
+                <input type="tel" class="kaf-input" name="cash_phone" placeholder="010-1234-5678" />
+              </div>
+            </div>
+          
+           
+          </section>
+          
+          <div class="divider"></div>
+          
+          
+        </div>
+  
+        <!-- 서류 발송 및 비자수령 -->
+        <div class="kaf-section">
+          <h3>서류 제출</h3>
+          <div class="kaf-grid">
+            <div class="kaf-label">여권 & 서류 제출방법</div>
+            <div class="kaf-field">
+              <select id="kaf-send" class="kaf-select">
+                <option value="post">여권: 택배발송(등기) + 서류: 카카오채널 접수</option>
+                <option value="visit">방문 제출</option>
+                <option value="etc">기타 방법</option>
+              </select>
+              <div class="kaf-note">원본 여권은 필수입니다.</div>
+            </div>
+          </div>
+          <!-- 택배발송 주소 -->
+          <div class="kaf-grid">
+            <div class="kaf-label">여권 보내실 주소</div>
+            <div class="kaf-field">
+              서울시 강서구 마곡중앙2로 15 마곡테크노타워2 610호<br>
+              Tel. 02-2658-4005 , 코반: 비자 담당자 앞
+              <button type="button" class="k-mapbtn" onclick=" window.open('https://map.naver.com/p/entry/place/1139786362?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202510021336&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh ', '_blank') ">지도</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+  
+        <!-- 비자 발급자 (간단 입력) -->
+
+<div class="kaf-section">
+  <!-- 🔹 제목 + 비자선택 + '신청자와 동일' 을 한 줄에 -->
+  <div class="kaf-section-head">
+    <h3>비자 발급 받는 분 1</h3>
+
+    <div class="kaf-head-right">
+      <!-- ✅ 신청 비자 종류 셀렉트: 제목 옆으로 이동 -->
+      <select class="kaf-select kaf-select-compact" id="f-visa">
+        <option value="">신청 비자 종류 선택</option>
+        <option value="tourist"   data-price="100000">관광비자 (₩100,000)</option>
+        <option value="bizSingle" data-price="100000">비즈니스 단수 (₩100,000)</option>
+        <option value="bizMulti"  data-price="130000">비즈니스 복수 (₩130,000)</option>
+      </select>
+
+      <!-- 신청자와 동일 체크 -->
+      <label class="k-badge-sm">
+        <input type="checkbox" class="f-copy"> 신청자와 동일
+      </label>
+    </div>
+  </div>
+
+  <div class="kaf-note" style="margin-top:6px">
+    영문 기입이 어려운 경우 한글 기입
+  </div>
+
+        
+<!-- 접힌 요약행들이 쌓이는 곳 -->
+<div id="appl-summaries" class="appl-sumlist" aria-live="polite"></div>
+
+<!-- 현재 편집 중인 발급자 카드 (사진 업로드 없음) -->
+<div id="appl-active" class="appl-card" data-mode="new" aria-label="발급자 입력 카드">
+  <div class="appl-fields">
+
+    
+
+    <div class="kaf-grid">
+      <div class="kaf-label">성명</div>
+      <div class="kaf-field kaf-row">
+        <input class="kaf-input" id="f-nameEn" placeholder="GILDONG HONG">
+      </div>
+    </div>
+
+    <div class="kaf-grid">
+      <div class="kaf-label">연락처 / Email</div>
+      <div class="kaf-field kaf-row">
+        <input class="kaf-input" id="f-phone" placeholder="010-0000-0000">
+        <input class="kaf-input" id="f-email" type="email" placeholder="mail@example.com">
+      </div>
+    </div>
+
+    <div class="kaf-grid">
+      <div class="kaf-label">거주지 주소(영문)</div>
+      <div class="kaf-field kaf-row">
+        <input class="kaf-input" id="f-addrEn" placeholder="Seoul … (EN)">
+      </div>
+    </div>
+
+    <div class="kaf-grid">
+      <div class="kaf-label">예상 출장기간/도착일</div>
+      <div class="kaf-field kaf-row">
+        <input class="kaf-input" id="f-trip" placeholder="예: 11/02~11/08">
+        <input class="kaf-input" id="f-arrive" type="date">
+      </div>
+    </div>
+
+   
+
+    <!-- 비즈니스만 노출 -->
+    <div id="biz-fields" style="display:none">
+      <div class="kaf-grid">
+        <div class="kaf-label">한국 직장명(영문)</div>
+        <div class="kaf-field"><input class="kaf-input" id="f-co" placeholder="Company (EN)"></div>
+      </div>
+      <div class="kaf-grid">
+        <div class="kaf-label">직장 전화번호</div>
+        <div class="kaf-field"><input class="kaf-input" id="f-coPhone" placeholder="02-000-0000"></div>
+      </div>
+      <div class="kaf-grid">
+        <div class="kaf-label">직장 주소</div>
+        <div class="kaf-field"><input class="kaf-input" id="f-coAddr" placeholder="Address"></div>
+      </div>
+    </div>
+
+
+    <div class="kaf-grid">
+      <div class="kaf-label">여권번호 / 만료일</div>
+      <div class="kaf-field kaf-row">
+        <input class="kaf-input" id="f-ppNo" placeholder="M1234567">
+        <input class="kaf-input" id="f-ppExp" type="date">
+      </div>
+    </div>
+
+    <div class="kaf-grid">
+      <div class="kaf-label">혼인 여부</div>
+      <div class="kaf-field">
+        <select class="kaf-select" id="f-marital">
+          <option value="">선택</option>
+          <option value="single">미혼</option>
+          <option value="married">기혼</option>
+          
+        </select>
+      </div>
+    </div>
+
+   
+
+    <div class="kaf-grid">
+      <div class="kaf-label">비자수령방법</div>
+      <div class="kaf-field">
+        <select id="kaf-recv" class="kaf-select">
+          <option value="ems5000">우체국익일특급비용 (5000)</option>
+          <option value="pickup0">직접 방문 수령 (0)</option>
+        </select>
+      </div>
+    </div>
+
+  
+    <div class="kaf-grid">
+      <div class="kaf-label">배송받으실 주소</div>
+      <div class="kaf-field">
+        <label class="k-badge-sm">
+          <input type="checkbox" id="f-copy-home"> 거주지 주소와 동일
+        </label>
+        <label class="k-badge-sm">
+          <input type="checkbox" id="f-copy-office"> 회사주소로 배송
+        </label>
+        
+        <div class="kaf-row" style="margin-top:8px">
+          <input class="kaf-input" id="f-recvAddrLine" placeholder="배송받으실 주소">
+          + <input class="kaf-input" id="f-recvName"     placeholder="수령인">
+          <input class="kaf-input" id="f-recvPhone" placeholder="전화번호">
+        </div>
+        <input class="kaf-input" id="f-recvAddr" placeholder="주소" style="margin-top:8px">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 신청자 카드가 들어갈 컨테이너 -->
+<div id="applicant-list"></div>
+
+<!-- (선택) 묶음 배송 체크 -->
+<label class="k-badge-sm" style="margin:8px 0; display:inline-flex; gap:6px">
+  <input type="checkbox" id="bundle-ship"> 모든 신청자 한 번에 배송(배송비 1회)
+</label>
+
+<!-- 추가 버튼 -->
+<div class="kaf-row" style="margin-top:10px;justify-content:flex-end">
+  <button type="button" id="btn-add-appl" class="k-apply">발급자 추가하기</button>
+  <button id="testAutoFillBtn" class="btn btn-primary" type="button">
+    테스트(자동입력)
+  </button>
+</div>
+
+ 
+
+
+        <!-- 결제방법 -->
+        <div class="kaf-section">
+          <h3>결제방법</h3>
+          <div class="kaf-body">
+            <div class="kaf-radio" id="kaf-paytype">
+              
+              <label><input type="radio" name="pay" value="wire" checked> 대표계좌입금 </label>
+                <label><input type="radio" name="pay" value="card"> 신용카드 (카카오톡 채널로 문의) </label>
+            </div>
+          </div>
+        </div>
+  
+       
+
+          <!-- 주문 합계(다인 기준) -->
+<div class="kaf-summary" id="order-summary">
+    <div class="row"><span>신청 인원</span><strong id="sum-count">0명</strong></div>
+    <div class="row"><span>비자 수수료 합계</span><strong id="sum-visa">0원</strong></div>
+    <div class="row"><span>배송비</span><strong id="sum-ship">0원</strong></div>
+    <div class="row"><span>부가세(10%)</span><strong id="sum-vat">0원</strong></div>
+    <div class="row total"><span>총 결제금액</span><strong id="sum-total">0원</strong></div>
+  </div>
+  <!-- ============= /다인 비자 신청 ============= -->
+        <!-- 동의 박스 (탭/클릭 시 모달 오픈) -->
+<label id="kaf-consent-box" class="kaf-consent" role="button" tabindex="0" aria-controls="privacy-modal">
+    <!-- 체크박스는 직접 체크 불가(모달로만 체크) -->
+    <input id="kaf-consent" type="checkbox" aria-label="개인정보 수집 및 이용 동의" />
+    <span>
+      <b>비자 신청을 위한 개인정보 수집·이용에 동의합니다. (필수)</b><br/>
+      비자 진행 알림(문자/카카오톡 등) 수신에 동의합니다.
+    </span>
+  </label>
+        </div>
+<!-- 개인정보 수집·이용 동의 모달 -->
+<div id="privacy-modal" class="k-modal" hidden>
+    <div class="k-modal-backdrop"></div>
+    <div class="k-modal-box" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+      <h2 id="privacy-title" class="k-modal-title">개인정보 수집·이용 동의</h2>
+  
+      <div class="k-modal-body">
+        <p>㈜코반투어(이하 “회사”)는 비자 신청 서비스 제공을 위하여 최소한의 개인정보만을 수집·이용합니다.</p>
+  
+        <h3>1) 수집 항목</h3>
+        <ul>
+          <li><b>필수</b>: 성명, 연락처(전화/휴대폰), 이메일, 주소, 영문성명, 여권번호, 여권만료일, 여권/비자 소지 여부</li>
+          <li><b>선택</b>: 생년월일, 결혼기념일 등(마케팅·안내)</li>
+          <li><b>만 14세 미만</b>: 법정대리인 성명/관계/연락처, 가족관계 증빙</li>
+        </ul>
+  
+        <h3>2) 이용 목적</h3>
+        <ul>
+          <li><b>서비스 제공</b>: 비자 신청/접수, 항공·호텔 예약 확인, 출국 가능 여부 확인, 진행 안내</li>
+          <li><b>회원/고객 관리</b>: 본인확인, 부정 이용 방지, 민원 처리 및 고지</li>
+          <li><b>마케팅(선택)</b>: 이벤트/신규 서비스 안내, 서비스 이용 통계</li>
+        </ul>
+  
+        <h3>3) 보유·이용 기간</h3>
+        <ul>
+          <li>목적 달성 시 즉시 파기</li>
+          <li>단, 관련 법령에 따라 아래 기간 보관 가능</li>
+          <li>① 계약·청약철회 등 기록: <b>5년</b></li>
+          <li>② 대금결제 및 재화 공급 기록: <b>5년</b></li>
+          <li>③ 소비자 불만·분쟁처리 기록: <b>3년</b></li>
+        </ul>
+  
+        <p class="k-modal-note">귀하는 동의를 거부할 권리가 있으나, 동의 거부 시 비자 신청 서비스 제공이 제한될 수 있습니다.</p>
+      </div>
+  
+      <div class="k-modal-actions">
+        <button id="privacy-accept" class="k-btn-yes">확인 및 동의</button>
+        <button id="privacy-cancel" class="k-btn-no" type="button">취소</button>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+  /* 모달 공통 스타일 */
+  .k-modal{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:9999}
+  .k-modal[hidden]{display:none}
+  .k-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+  .k-modal-box{position:relative;background:#fff;border-radius:14px;padding:20px;max-width:560px;width:92%;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);z-index:1}
+  .k-modal-title{margin:0 0 12px;font-size:18px;font-weight:900;color:#111827}
+  .k-modal-body{font-size:14px;color:#374151;line-height:1.7;max-height:60vh;overflow:auto}
+  .k-modal-body h3{margin:12px 0 6px;font-size:15px;font-weight:800;color:#111827}
+  .k-modal-body ul{margin:6px 0 10px 18px}
+  .k-modal-note{margin-top:8px;color:#6b7280}
+  .k-modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+  .k-btn-yes{background:#1f4b85;color:#fff;padding:9px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:800}
+  .k-btn-no{background:#e5e7eb;color:#111827;padding:9px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:800}
+  </style>
+
+<script>
+    // ===== 개인정보 동의 모달 로직 =====
+    (function(){
+      const consentBox = document.getElementById('kaf-consent-box');
+      const consentInp = document.getElementById('kaf-consent');
+      const payBtn     = document.getElementById('kaf-paybtn');
+      const modal      = document.getElementById('privacy-modal');
+      const acceptBtn  = document.getElementById('privacy-accept');
+      const cancelBtn  = document.getElementById('privacy-cancel');
+    
+      // 접근성: 스페이스/엔터로도 열기
+      consentBox?.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          openModal();
+        }
+      });
+    
+      // 동의 박스 클릭 시 모달 열기 (체크박스 직접 클릭도 인터셉트)
+      consentBox?.addEventListener('click', (e)=>{
+        // 링크/버튼 직접 클릭은 무시
+        if (e.target.closest('a,button')) return;
+        e.preventDefault();
+        openModal();
+      });
+      consentInp?.addEventListener('click', (e)=>{
+        // 체크박스 직접 체크 방지
+        e.preventDefault();
+        openModal();
+      });
+    
+      // 결제 버튼 누를 때 동의 안되면 모달 띄우기(이중 안전장치)
+      payBtn?.addEventListener('click', (e)=>{
+        if(!consentInp?.checked){
+          e.preventDefault();
+          openModal();
+        }
+      });
+    
+      function openModal(){ if (modal) modal.hidden = false; }
+      function closeModal(){ if (modal) modal.hidden = true; }
+    
+      // 모달: 확인 및 동의 → 체크 확정
+      acceptBtn?.addEventListener('click', ()=>{
+        if (consentInp){
+          consentInp.checked = true;
+          // 결제 버튼이 동의 여부에 따라 비활성화되어야 한다면 주석 해제
+          // if (payBtn) payBtn.disabled = false;
+        }
+        closeModal();
+      });
+    
+      // 모달: 취소
+      cancelBtn?.addEventListener('click', closeModal);
+    
+      // 배경 클릭 시 닫기(선택)
+      modal?.addEventListener('click', (e)=>{
+        if (e.target === modal || e.target.classList.contains('k-modal-backdrop')){
+          closeModal();
+        }
+      });
+    })();
+
+
+// ⭐ TEST 자동입력: 신청자 정보 + 비자발급 받는 분 1 둘 다 채우기
+function autoFillTestData() {
+  const today = new Date().toISOString().slice(0, 10); // yyyy-mm-dd
+
+  // =====================
+  // 1) 신청자 정보 자동입력
+  // =====================
+  const applName   = document.getElementById('kaf-name');
+  const applPhone1 = document.getElementById('kaf-phone1');
+  const applPhone2 = document.getElementById('kaf-phone2');
+  const applPhone3 = document.getElementById('kaf-phone3');
+  const applEmail  = document.getElementById('kaf-email');
+
+  if (applName)   applName.value   = '테스트 신청자';
+  if (applPhone1) applPhone1.value = '010';
+  if (applPhone2) applPhone2.value = '1234';
+  if (applPhone3) applPhone3.value = '5678';
+  if (applEmail)  applEmail.value  = 'test@example.com';
+
+  // ================================
+  // 2) 비자발급 받는 분 1(appl-active)
+  // ================================
+  const visaSel      = document.getElementById('f-visa');
+  const fNameEn      = document.getElementById('f-nameEn');
+  const fPhone       = document.getElementById('f-phone');
+  const fEmail       = document.getElementById('f-email');
+  const fAddrEn      = document.getElementById('f-addrEn');
+  const fTrip        = document.getElementById('f-trip');
+  const fArrive      = document.getElementById('f-arrive');
+  const fCo          = document.getElementById('f-co');
+  const fCoPhone     = document.getElementById('f-coPhone');
+  const fCoAddr      = document.getElementById('f-coAddr');
+  const fPpNo        = document.getElementById('f-ppNo');
+  const fPpExp       = document.getElementById('f-ppExp');
+  const fMarital     = document.getElementById('f-marital');
+  const fRecvAddrLine= document.getElementById('f-recvAddrLine');
+  const fRecvName    = document.getElementById('f-recvName');
+  const fRecvPhone   = document.getElementById('f-recvPhone');
+  const fRecvAddr    = document.getElementById('f-recvAddr');
+
+  // 비자 종류: 관광비자 선택
+  if (visaSel) {
+    visaSel.value = 'tourist';
+    // 혹시 change 이벤트에 맞춰 biz-fields 토글 같은 거 쓰고 있으면 살리기
+    visaSel.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  if (fNameEn)  fNameEn.value  = 'GILDONG HONG';
+  if (fPhone)   fPhone.value   = '010-1234-5678';
+  if (fEmail)   fEmail.value   = 'test@example.com';
+  if (fAddrEn)  fAddrEn.value  = 'Magok, Gangseo-gu, Seoul, Korea';
+  if (fTrip)    fTrip.value    = '11/02~11/08';
+  if (fArrive)  fArrive.value  = today;
+
+  if (fCo)      fCo.value      = 'KORBAN Consulting';
+  if (fCoPhone) fCoPhone.value = '02-2658-4006';
+  if (fCoAddr)  fCoAddr.value  = 'Magok Techno Tower 2, #610, Seoul';
+
+  if (fPpNo)    fPpNo.value    = 'M1234567';
+  if (fPpExp)   fPpExp.value   = today;
+  if (fMarital) fMarital.value = 'single';
+
+  if (fRecvAddrLine) fRecvAddrLine.value = '서울시 강서구 마곡중앙2로 15';
+  if (fRecvName)     fRecvName.value     = '홍길동';
+  if (fRecvPhone)    fRecvPhone.value    = '010-1234-5678';
+  if (fRecvAddr)     fRecvAddr.value     = '서울시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호';
+
+  // =====================
+  // 3) 하이라이트 효과
+  // =====================
+  const applSection = document.getElementById('appl-active');
+  if (applSection) {
+    applSection.classList.add('k-product-highlight');
+    setTimeout(() => {
+      applSection.classList.remove('k-product-highlight');
+    }, 1500);
+  }
+}
+
+// 버튼 클릭 이벤트
+document.getElementById("testAutoFillBtn")?.addEventListener("click", autoFillTestData);
+
+
+    </script>
+    
+    
+        <button id="kaf-paybtn" class="kaf-paybtn" disabled>결제하기</button>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+      
+  <pre id="out"></pre>
+  
+  
+  
+        <script>
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const applVisaSel = document.getElementById('f-visa');
+
+const bizFields   = document.getElementById('biz-fields');
+
+applVisaSel?.addEventListener('change', (e) => {
+  const val = e.target.value;
+  if (!bizFields) return;
+
+  // 비즈니스 비자면 표시, 아니면 숨김
+  if (val === 'bizSingle' || val === 'bizMulti') {
+    bizFields.style.display = '';
+  } else {
+    bizFields.style.display = 'none';
+  }
+});
+
+    // === 요약 계산 요소 ===
+    const sumPriceEl = document.getElementById('sum-visa');
+    const sumShipEl  = document.getElementById('sum-ship');
+    const sumVatEl   = document.getElementById('sum-vat');
+    const sumTotalEl = document.getElementById('sum-total');
+    const recvSel = document.getElementById('kaf-recv');
+
+      // ===== '신청자 동일' 체크 시 위 신청자 정보 → 발급자 1로 복사 =====
+  const sameApplCheckbox = document.querySelector('#appl-active .f-copy');
+
+sameApplCheckbox?.addEventListener('change', (e) => {
+  // 체크 되었을 때만 동작
+  if (!e.target.checked) return;
+
+  // ─ 위쪽 신청자 정보 ─
+  const applName   = document.getElementById('kaf-name')?.value.trim() || '';
+  const phone1     = document.getElementById('kaf-phone1')?.value.trim() || '';
+  const phone2     = document.getElementById('kaf-phone2')?.value.trim() || '';
+  const phone3     = document.getElementById('kaf-phone3')?.value.trim() || '';
+  const applEmail  = document.getElementById('kaf-email')?.value.trim() || '';
+
+  const fullPhone = [phone1, phone2, phone3].filter(Boolean).join('-');
+
+  // ─ 아래 발급자 1(appl-active) 필드들 ─
+  const fNameEn    = document.getElementById('f-nameEn');
+  const fPhone     = document.getElementById('f-phone');
+  const fEmail     = document.getElementById('f-email');
+  const fRecvName  = document.getElementById('f-recvName');
+  const fRecvPhone = document.getElementById('f-recvPhone');
+
+  // 이름: 한글이지만 일단 그대로 복사 (나중에 영문으로 수정 가능)
+  if (fNameEn && applName)  fNameEn.value  = applName;
+
+  // 연락처 / 이메일
+  if (fPhone && fullPhone)  fPhone.value   = fullPhone;
+  if (fEmail && applEmail)  fEmail.value   = applEmail;
+
+  // 배송 수령인 정보도 같이 채워주기
+  if (fRecvName && applName)   fRecvName.value  = applName;
+  if (fRecvPhone && fullPhone) fRecvPhone.value = fullPhone;
+});
+
+  
+    // --- endpoints
+    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzCNgVpwQ60auUiKTjtujeLJ7Gz8ihi7isbuOkw87fSgC31a4dX8qsEX9exEFUarfcn7w/exec';
+  
+    // --- elements
+    const products = document.querySelectorAll(".k-prod");
+    const totalEl  = document.getElementById("k-total");
+    const applyBtn = document.getElementById("k-apply");
+    const reqBox   = document.getElementById("requirements");
+    const formSec  = document.getElementById('k-apply-form');
+    const kafPayBtn= document.getElementById('kaf-paybtn');
+    const consentEl= document.getElementById('kaf-consent');
+    const dlbar    = document.getElementById("k-dlbar");
+  
+    let selectedSku = null;
+      
+
+
+
+
+
+
+    // --- 코반 비자 선택시 스크롤 + 하이라이트 ---
+    function scrollToApplyForm() {
+  // 비자 신청서 전체 섹션
+  const applySection =
+    document.getElementById('k-apply-form') ||
+    document.querySelector('.k-apply-form');
+
+  if (!applySection) return;
+
+  // 부드러운 스크롤
+  try {
+    applySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch {
+    const rect = applySection.getBoundingClientRect();
+    const y = rect.top + window.pageYOffset - 80;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  // 하이라이트 효과
+  applySection.classList.add('k-product-highlight');
+
+  setTimeout(() => {
+    applySection.classList.remove('k-product-highlight');
+  }, 2000);
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    // ⭐ 코반 신청서 버튼 → 발급자 비자 선택칸으로 스크롤 + 반짝임
+      const korbanFormBtn = document.getElementById('korbanFormBtn');
+
+function scrollToVisaSelect() {
+  // 1순위: 현재 활성 발급자 카드 안의 비자 선택
+  let visaSelect =
+    document.querySelector('#k-products') ||
+    document.getElementById('k-products') ||
+    document.querySelector('.k-products');
+
+  if (!visaSelect) return;
+
+  // 부드러운 스크롤
+  try {
+    visaSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch {
+    const rect = visaSelect.getBoundingClientRect();
+    const y = rect.top + window.pageYOffset - 120;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  // 반짝이 하이라이트 + 포커스
+  visaSelect.classList.add('k-product-highlight');
+  visaSelect.focus({ preventScroll: true });
+
+  // 2초 후 효과 제거
+  setTimeout(() => {
+    visaSelect.classList.remove('k-product-highlight');
+  }, 2000);
+}
+
+// 코반 신청서 버튼 클릭 시 실행
+korbanFormBtn?.addEventListener('click', () => {
+
+  //   현재 페이지에서는 스크롤/하이라이트만 동작함.
+  scrollToVisaSelect();
+});
+
+
+// // --- 상품 선택 이벤트
+  // sku → 발급자 섹션의 셀렉트 값으로 변환
+  function syncApplVisaFromProduct(sku) {
+    if (!applVisaSel) return;
+
+    let val = "";
+    if (sku === "tourist")      val = "tourist";
+    else if (sku === "biz-single") val = "bizSingle";
+    else if (sku === "biz-multi")  val = "bizMulti";
+
+    if (val) {
+      applVisaSel.value = val;
+      // 비즈니스 선택 시 biz-fields 노출용 change 이벤트도 날려줌
+      applVisaSel.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
+
+
+    // --- helper: 선택 상품
+    function getSelectedProduct() {
+      const sel = document.querySelector('.k-prod.is-selected');
+      if (!sel) return null;
+      return {
+        sku: sel.dataset.sku,
+        name: sel.querySelector('h4')?.textContent ?? '',
+        price: Number(sel.dataset.price || 0)
+      };
+    }
+  
+    // --- 요약 계산
+    function updateSummaryNow(){
+      const p = getSelectedProduct();
+      const price = p ? Number(p.price || 0) : 0;
+      const ship  = (recvSel && recvSel.value === 'ems5000') ? 5000 : 0;
+      const subtotal = price + ship;
+      const vat   = Math.round(subtotal * 0.1);
+      const total = subtotal + vat;
+  
+      if (sumPriceEl) sumPriceEl.textContent = `${price.toLocaleString()}원`;
+      if (sumShipEl)  sumShipEl.textContent  = `${ship.toLocaleString()}원`;
+      if (sumVatEl)   sumVatEl.textContent   = `${vat.toLocaleString()}원`;
+      if (sumTotalEl) sumTotalEl.textContent = `${total.toLocaleString()}원`;
+    }
+  
+    // --- 다운로드 링크 데이터 & 렌더
+    const dlLinks = {
+      tourist: [
+   
+        { href: "https://drive.google.com/drive/folders/15kRsvFzJ1HJxRASfXoK7NyX30hXndOfG", label: "제출 서류 참고" }
+      ],
+      "biz-single": [
+     
+        { href: "https://drive.google.com/drive/u/2/folders/1bWcCaStBqkvVRCkIgrocH8_q9S2mwOYA", label: "제출 서류 참고" }
+      ],
+      "biz-multi": [
+        
+        { href: "https://drive.google.com/drive/u/2/folders/1bWcCaStBqkvVRCkIgrocH8_q9S2mwOYA", label: "제출 서류 참고" }
+      ]
+    };
+    function renderDownloadBar(sku){
+      const items = dlLinks[sku] || [];
+      if (!items.length){ dlbar.innerHTML = ""; return; }
+      dlbar.innerHTML = items.map(i => `
+        <a class="k-dlbtn" href="${i.href}" target="_blank" rel="noopener">
+          <svg class="k-dlico" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>
+          </svg>
+          ${i.label}
+        </a>
+      `).join("");
+    }
+  
+    // --- 제출서류 데이터
+    const docs = {
+      tourist: `
+        <div class="k-card">
+          <h2 class="k-title">관광비자 제출서류</h2>
+          <ul class="k-list">
+            <li class="k-li"><h3>1. 여권 원본</h3><p>입국일 기준 <b>6개월 이상</b> 유효, 사증란 확보 필요</p></li>
+            <li class="k-li"><h3>2. 여권 사진 1장</h3><p>3.5×4.5cm, 배경 흰색</p></li>
+            <li class="k-li"><h3>3. 코반 비자 신청서</h3><p>다운로드 후 작성</p></li>
+            <li class="k-li"><h3>4. 호텔 예약증 또는 초청장</h3><p>영문 제출</p></li>
+            <li class="k-li"><h3>5. 왕복 항공권</h3><p>영문 제출</p></li>
+            <li class="k-li"><h3>6. 여행 계획표</h3><p>방문 일정·장소 타이핑 제출</p></li>
+          </ul>
+        </div>`,
+      "biz-single": `
+        <div class="k-card">
+          <h2 class="k-title">비즈니스 단수 제출서류</h2>
+          <ul class="k-list">
+            <li class="k-li"><h3>1. 여권 원본</h3></li>
+            <li class="k-li"><h3>2. 여권 사진 1장</h3></li>
+            <li class="k-li"><h3>3. 코반 비자 신청서</h3></li>
+            <li class="k-li"><h3>4. 출장명령서</h3><p>출장 목적·기간 명시</p></li>
+            <li class="k-li"><h3>5. 재직증명서</h3></li>
+            <li class="k-li"><h3>6. 영문 사업자등록증명원</h3><p>홈택스 발급</p></li>
+            <li class="k-li"><h3>7. 현지 회사 초청장</h3><p>필수 아님, 요청될 수 있음</p></li>
+          </ul>
+        </div>`,
+      "biz-multi": `
+        <div class="k-card">
+          <h2 class="k-title">비즈니스 복수 제출서류</h2>
+          <ul class="k-list">
+            <li class="k-li"><h3>1. 여권 원본</h3></li>
+            <li class="k-li"><h3>2. 여권 사진 1장</h3></li>
+            <li class="k-li"><h3>3. 코반 비자 신청서</h3></li>
+            <li class="k-li"><h3>4. 출장명령서</h3><p>방문 목적·기간·현지 회사 정보 포함</p></li>
+            <li class="k-li"><h3>5. 재직증명서</h3></li>
+            <li class="k-li"><h3>6. 영문 사업자등록증명원</h3></li>
+            <li class="k-li"><h3>7. 현지 회사 초청장</h3></li>
+            <li class="k-li"><h3>8. 방글라데시 초청회사 법인 등록증 (Certificate of Incorporation)</h3></li>
+            <li class="k-li"><h3>9. 방글라데시 초청회사 사업자 등록증 (Trade license)</h3></li>
+          </ul>
+        </div>`
+    };
+  
+    // --- 상품 선택 이벤트 (★ 여기서 요약도 갱신)
+    products.forEach(p=>{
+      p.addEventListener("click", ()=>{
+        products.forEach(x=>x.classList.remove("is-selected"));
+        p.classList.add("is-selected");
+        selectedSku = p.dataset.sku;
+  
+        totalEl.textContent = "선택된 상품: " + p.querySelector("h4").textContent +
+                              " (" + p.querySelector(".k-price").textContent + ")";
+        applyBtn.disabled = false;
+        reqBox.innerHTML = docs[selectedSku];
+        renderDownloadBar(selectedSku);
+        syncApplVisaFromProduct(selectedSku); // 🔄 상품 선택 시 발급자 섹션 동기화
+  
+        updateSummaryNow(); // ✅ 선택 즉시 금액 갱신
+            // ⭐ 상품 선택 후 아래 신청서 섹션으로 이동 + 하이라이트
+    scrollToApplyForm();
+      });
+    });
+  
+// --- “신청서 작성” 클릭 시 폼 열고, 요약 갱신
+applyBtn?.addEventListener('click', () => {
+  const p = getSelectedProduct();
+  if (!p) { alert('상품을 먼저 선택해 주세요.'); return; }
+
+  document.getElementById('kaf-product-name').textContent = p.name;
+  sumPriceEl.textContent = `${p.price.toLocaleString()}원`;
+
+  // hidden 해제
+  // (removeAttribute 대신 명시적으로)
+  formSec.hidden = false;
+  kafPayBtn.disabled = false;
+
+  updateSummaryNow();
+
+  // 레이아웃 반영된 다음 프레임에 스크롤
+  requestAnimationFrame(() => {
+    try {
+      formSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // 일부 빌더/브라우저용 폴백
+      const y = formSec.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+  
+    // --- 배송방법 변경 시 요약 갱신
+    recvSel?.addEventListener('change', updateSummaryNow);
+  
+    // --- 제출 (변경 없음)
+    async function submitPayload(payload) {
+      const res = await fetch(WEBAPP_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'text/plain' }, // 프리플라이트 회피
+        body: JSON.stringify(payload)
+      });
+      const text = await res.text();
+      let data = {};
+      try { data = JSON.parse(text); } catch {}
+      return { ok: res.ok, data, raw: text };
+    }
+  
+    kafPayBtn?.addEventListener('click', async () => {
+      const product = getSelectedProduct();
+      const name  = document.getElementById('kaf-name').value.trim();
+      const email = document.getElementById('kaf-email').value.trim();
+      const p2    = document.getElementById('kaf-phone2').value.trim();
+      const p3    = document.getElementById('kaf-phone3').value.trim();
+      const phone = document.getElementById('kaf-phone1').value + "-" + p2 + "-" + p3;
+      const recv  = document.getElementById('kaf-recv').value;
+      const sendMethod = document.getElementById('kaf-send').value;
+      const payType = document.querySelector('input[name="pay"]:checked').value;
+      const address  = document.getElementById('kaf-addr1')?.value.trim() || '';
+      const same     = !!document.getElementById('kaf-same')?.checked;
+      const receiver = document.getElementById('kaf-rname')?.value.trim() || '';
+  
+      const shipFee = recv==='ems5000' ? 5000 : 0;
+      const price = product ? product.price : 0;
+      const subtotal = price + shipFee;
+      const vat = Math.round(subtotal * 0.1);
+      const total = subtotal + vat;
+  
+      if(!product){ return alert('신청할 상품을 선택해 주세요.'); }
+      if(!name || !email.includes('@')) return alert('이름/이메일을 확인해 주세요.');
+      if(!/^\d{4}$/.test(p2)||!/^\d{4}$/.test(p3)) return alert('휴대폰 번호를 정확히 입력해 주세요.');
+      if(!consentEl.checked) return alert('개인정보 수집 및 이용 동의가 필요합니다.');
+  
+      const payload = {
+        name, email, phone,
+        product: product.name, price, ship: shipFee, vat, total,
+        payType, recv, sendMethod,
+        address, same, receiver
+      };
+  
+      // lock UI
+      kafPayBtn.disabled = true;
+      const prevTxt = kafPayBtn.textContent;
+      kafPayBtn.textContent = '전송 중...';
+  
+      try {
+        const result = await submitPayload(payload);
+        if (result.ok && (result.data.ok || result.data.result === 'success')) {
+          alert('✅ 접수되었습니다! (이제 서류를 제출해주세요!)');
+        } else {
+          alert('⚠️ 응답이 예상과 다릅니다. 시트를 확인해 주세요.\n\n' + result.raw);
+          console.log(result);
+        }
+      } catch (err) {
+        alert('❌ 네트워크 오류: ' + err + '\n\n(카카오채널로 문의바랍니다.)');
+        console.error(err);
+      } finally {
+        kafPayBtn.disabled = false;
+        kafPayBtn.textContent = prevTxt;
+      }
+    });
+
+/* ===== 다인 신청 로직 ===== */
+(function(){
+  // 가격표(원)
+  const VISA = {
+    tourist:   { name: "관광비자",      price: 100000 },
+    bizSingle: { name: "비즈니스 단수", price: 100000 },
+    bizMulti:  { name: "비즈니스 복수", price: 130000 }
+  };
+  const SHIP_FEE = 5000; // 우체국 익일특급 1회
+
+
+
+    // 템플릿: 신청자 카드 (다인 신청용)
+    function cardTemplate(a){
+  const bizArea = `
+    <div class="kaf-grid">
+      <div class="kaf-label">한국 직장명(영문)</div>
+      <div class="kaf-field">
+        <input class="kaf-input f-co" placeholder="Company (EN)" value="${a.co||''}">
+      </div>
+    </div>
+    <div class="kaf-grid">
+      <div class="kaf-label">직장 전화번호</div>
+      <div class="kaf-field">
+        <input class="kaf-input f-coPhone" placeholder="02-000-0000" value="${a.coPhone||''}">
+      </div>
+    </div>
+    <div class="kaf-grid">
+      <div class="kaf-label">직장 주소</div>
+      <div class="kaf-field">
+        <input class="kaf-input f-coAddr" placeholder="Address" value="${a.coAddr||''}">
+      </div>
+    </div>
+  `;
+
+  return `
+    <div class="kaf-section applicant-card" data-id="${a.id}">
+      <!-- ✅ 단일 폼과 동일한 헤더 구조 -->
+      <div class="kaf-section-head">
+        <h3>비자 발급 받는 분 ${a.no + 1}</h3>
+
+        <div class="kaf-head-right">
+          <!-- 제목 옆 비자 선택 -->
+          <select class="kaf-select kaf-select-compact f-visa">
+            <option value="">신청 비자 종류 선택</option>
+            <option value="tourist"   ${a.visa==='tourist'?'selected':''}>관광비자 (₩100,000)</option>
+            <option value="bizSingle" ${a.visa==='bizSingle'?'selected':''}>비즈니스 단수 (₩100,000)</option>
+            <option value="bizMulti"  ${a.visa==='bizMulti'?'selected':''}>비즈니스 복수 (₩130,000)</option>
+          </select>
+
+          <!-- 금액 표시(원하면 유지) -->
+          <span class="k-badge-sm">
+            ₩${(a.price||0).toLocaleString()}
+          </span>
+
+          <!-- 신청자와 동일 -->
+          <label class="k-badge-sm">
+            <input type="checkbox" class="f-copy"> 신청자와 동일
+          </label>
+
+          <!-- 삭제 버튼 -->
+          <button type="button" class="k-mapbtn btn-remove" title="신청자 삭제">삭제</button>
+        </div>
+      </div>
+
+      <div class="kaf-note" style="margin-top:6px">
+        영문 기입이 어려운 경우 한글 기입
+      </div>
+
+
+        <!-- 기본 정보 -->
+        <div class="kaf-grid">
+          <div class="kaf-label">성명(국문/영문)</div>
+          <div class="kaf-field kaf-row">
+            <input class="kaf-input f-nameKo" placeholder="홍길동" value="${a.nameKo||''}">
+            <input class="kaf-input f-nameEn" placeholder="GILDONG HONG" value="${a.nameEn||''}">
+          </div>
+        </div>
+
+        <div class="kaf-grid">
+          <div class="kaf-label">연락처 / Email</div>
+          <div class="kaf-field kaf-row">
+            <input class="kaf-input f-phone" placeholder="010-0000-0000" value="${a.phone||''}">
+            <input class="kaf-input f-email" type="email" placeholder="mail@example.com" value="${a.email||''}">
+          </div>
+        </div>
+
+        <div class="kaf-grid">
+          <div class="kaf-label">여권번호 / 만료일</div>
+          <div class="kaf-field kaf-row">
+            <input class="kaf-input f-ppNo" placeholder="M1234567" value="${a.ppNo||''}">
+            <input class="kaf-input f-ppExp" type="date" value="${a.ppExp||''}">
+          </div>
+        </div>
+
+        <div class="kaf-grid">
+          <div class="kaf-label">혼인 여부</div>
+          <div class="kaf-field">
+            <select class="kaf-select f-marital">
+              <option value="">선택</option>
+              <option value="single"  ${a.marital==='single'?'selected':''}>미혼</option>
+              <option value="married" ${a.marital==='married'?'selected':''}>기혼</option>
+              <option value="divorced"${a.marital==='divorced'?'selected':''}>이혼</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="kaf-grid">
+          <div class="kaf-label">거주지 주소(한/영)</div>
+          <div class="kaf-field kaf-row">
+            <input class="kaf-input f-addrKo" placeholder="서울시 …" value="${a.addrKo||''}">
+            <input class="kaf-input f-addrEn" placeholder="Seoul … (EN)" value="${a.addrEn||''}">
+          </div>
+        </div>
+
+        <div class="kaf-grid">
+          <div class="kaf-label">예상 출장기간/도착일</div>
+          <div class="kaf-field kaf-row">
+            <input class="kaf-input f-trip" placeholder="예: 11/02~11/08" value="${a.trip||''}">
+            <input class="kaf-input f-arrive" type="date" value="${a.arrive||''}">
+          </div>
+        </div>
+
+ 
+
+        <!-- 한국 직장 정보(비즈니스 시 노출) -->
+        <div class="biz-only" style="${/^biz/.test(a.visa)?'':'display:none'}">
+          ${bizArea}
+        </div>
+
+        <!-- 배송 정보 -->
+        <div class="kaf-grid">
+          <div class="kaf-label">비자 발급 후 등기 배송</div>
+          <div class="kaf-field">
+            <label class="k-badge-sm" title="위 신청자 기본정보(성명/연락처/주소)로 복사">
+              <input type="checkbox" class="f-copy"> 신청자와 동일
+            </label>
+            <div class="kaf-row" style="margin-top:8px">
+              <input class="kaf-input f-recvName" placeholder="수령인" value="${a.recvName||''}">
+              <input class="kaf-input f-recvPhone" placeholder="전화번호" value="${a.recvPhone||''}">
+            </div>
+            <input class="kaf-input f-recvAddr" placeholder="주소" style="margin-top:8px" value="${a.recvAddr||''}">
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  const listEl    = document.getElementById('applicant-list');
+  const addBtn    = document.getElementById('btn-add-appl');
+  const bundleEl  = document.getElementById('bundle-ship');
+
+  // 합계 표시
+  const sumCount  = document.getElementById('sum-count');
+  const sumVisa   = document.getElementById('sum-visa');
+  const sumShip   = document.getElementById('sum-ship');
+  const sumVat    = document.getElementById('sum-vat');
+  const sumTotal  = document.getElementById('sum-total');
+
+  const payBtn    = document.getElementById('kaf-paybtn');
+
+  let applicants = [];
+
+  
+
+  // 추가
+  addBtn?.addEventListener('click', ()=>{
+    const id = Date.now() + Math.random();
+    applicants.push({
+      id, no: applicants.length+1,
+      visa:'', price:0
+    });
+    render();
+  });
+
+  // 삭제/변경/복사 → 이벤트 위임
+  listEl?.addEventListener('click', (e)=>{
+    const card = e.target.closest('.applicant-card'); if(!card) return;
+    const id = card.dataset.id;
+    const idx = applicants.findIndex(x=>String(x.id)===id); if(idx<0) return;
+
+    if (e.target.classList.contains('btn-remove')){
+      applicants.splice(idx,1);
+      // 번호 재정렬
+      applicants = applicants.map((a,i)=>({...a,no:i+1}));
+      render();
+    }
+  });
+
+  listEl?.addEventListener('change', onInput);
+  listEl?.addEventListener('input',  onInput);
+
+  function onInput(e){
+    const card = e.target.closest('.applicant-card'); if(!card) return;
+    const id   = card.dataset.id;
+    const a    = applicants.find(x=>String(x.id)===id); if(!a) return;
+
+    // 필드 매핑
+    if (e.target.classList.contains('f-visa')){
+      a.visa  = e.target.value || '';
+      a.price = VISA[a.visa]?.price||0;
+      // 비즈니스 영역 토글
+      const biz = card.querySelector('.biz-only');
+      if (biz) biz.style.display = /^biz/.test(a.visa) ? '' : 'none';
+    }
+    if (e.target.classList.contains('f-copy')){
+      // 신청자 기본 → 배송 복사
+      const name = card.querySelector('.f-nameKo')?.value || '';
+      const phone= card.querySelector('.f-phone')?.value  || '';
+      const addr = card.querySelector('.f-addrKo')?.value || '';
+      card.querySelector('.f-recvName').value  = name;
+      card.querySelector('.f-recvPhone').value = phone;
+      card.querySelector('.f-recvAddr').value  = addr;
+      a.recvName = name; a.recvPhone = phone; a.recvAddr = addr;
+    }
+    // 공통 텍스트 필드 저장
+    a.nameKo   = card.querySelector('.f-nameKo')?.value||'';
+    a.nameEn   = card.querySelector('.f-nameEn')?.value||'';
+    a.phone    = card.querySelector('.f-phone') ?.value||'';
+    a.email    = card.querySelector('.f-email') ?.value||'';
+    a.ppNo     = card.querySelector('.f-ppNo')  ?.value||'';
+    a.ppExp    = card.querySelector('.f-ppExp') ?.value||'';
+    a.marital  = card.querySelector('.f-marital')?.value||'';
+    a.addrKo   = card.querySelector('.f-addrKo')?.value||'';
+    a.addrEn   = card.querySelector('.f-addrEn')?.value||'';
+    a.trip     = card.querySelector('.f-trip')  ?.value||'';
+    a.arrive   = card.querySelector('.f-arrive')?.value||'';
+    a.co       = card.querySelector('.f-co')    ?.value||'';
+    a.coPhone  = card.querySelector('.f-coPhone')?.value||'';
+    a.coAddr   = card.querySelector('.f-coAddr') ?.value||'';
+    a.recvName = card.querySelector('.f-recvName')?.value||'';
+    a.recvPhone= card.querySelector('.f-recvPhone')?.value||'';
+    a.recvAddr = card.querySelector('.f-recvAddr') ?.value||'';
+
+    updateSummary();
+  }
+
+  bundleEl?.addEventListener('change', updateSummary);
+
+  function render(){
+    listEl.innerHTML = applicants.map(cardTemplate).join('');
+    updateSummary();
+  }
+
+  function updateSummary(){
+    const people = applicants.length;
+    const visaSum= applicants.reduce((s,a)=>s+(a.price||0),0);
+    const shipCount = (!people) ? 0 : (bundleEl?.checked ? 1 : people);
+    const ship = shipCount * SHIP_FEE;
+    const vat  = Math.round((visaSum + ship) * 0.1);
+    const total= visaSum + ship + vat;
+
+    sumCount.textContent = `${people}명`;
+    sumVisa.textContent  = `${visaSum.toLocaleString()}원`;
+    sumShip.textContent  = `${ship.toLocaleString()}원`;
+    sumVat.textContent   = `${vat.toLocaleString()}원`;
+    sumTotal.textContent = `${total.toLocaleString()}원`;
+
+    // 결제 버튼 잠금 해제 조건(예시): 1명 이상 & 각자 비자 선택됨
+    const ready = people>0 && applicants.every(a=>a.visa);
+    if (payBtn) payBtn.disabled = !ready;
+  }
+
+  // 결제 버튼 클릭 시 payload에 applicants 포함(당신의 기존 submit에 합치면 됨)
+  const oldHandler = window.__kaf_old_submit;
+  const btn = document.getElementById('kaf-paybtn');
+  if (btn && !btn.dataset.multiHooked){
+    btn.dataset.multiHooked = '1';
+    btn.addEventListener('click', ()=>{
+      // 전송용 전역 payload에 붙이고 싶다면:
+      window.KORBAN_APPLICANTS = applicants; // ← 서버/시트에서 읽으면 됨
+      // 예: 기존 submitPayload(payload) 호출 전에 payload.applicants = applicants;
+    }, { capture:true });
+  }
+  // 초기 한 장 생성(원하면 주석)
+  // addBtn?.click();
+})();
+    
+  
+  });
+
+// Receipt type toggle
+document.querySelectorAll("input[name='receipt_type']").forEach(r => {
+  r.addEventListener("change", () => {
+    const val = r.value;
+
+    document.getElementById("taxEmailRow").style.display =
+      val === "tax" ? "block" : "none";
+
+    document.getElementById("cashPhoneRow").style.display =
+      val === "cash" ? "block" : "none";
+  });
+});
+
+
+  </script>
+  
+          
+  
