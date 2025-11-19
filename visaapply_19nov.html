@@ -1,6 +1,8 @@
 <section class="korban-visa">
     <style>
-
+.kaf-head-left{
+  display:flex; align-items:center; gap:12px;
+}
 .btn.btn-download {
   display: inline-flex;
   align-items: center;
@@ -1807,11 +1809,17 @@ applyBtn?.addEventListener('click', () => {
   return `
     <div class="kaf-section applicant-card" data-id="${a.id}">
       <!-- ✅ 단일 폼과 동일한 헤더 구조 -->
+      
       <div class="kaf-section-head">
+        <div class="kaf-head-left">
         <h3>비자 발급 받는 분 ${a.no + 1}</h3>
+         <!-- 삭제 버튼 -->
+          <button type="button" class="k-mapbtn btn-remove" title="신청자 삭제">삭제</button>
+          </div>
 
+         
         <div class="kaf-head-right">
-          <!-- 제목 옆 비자 선택 -->
+          
           <select class="kaf-select kaf-select-compact f-visa">
             <option value="">신청 비자 종류 선택</option>
             <option value="tourist"   ${a.visa==='tourist'?'selected':''}>관광비자 (₩100,000)</option>
@@ -1819,18 +1827,11 @@ applyBtn?.addEventListener('click', () => {
             <option value="bizMulti"  ${a.visa==='bizMulti'?'selected':''}>비즈니스 복수 (₩130,000)</option>
           </select>
 
-          <!-- 금액 표시(원하면 유지) -->
-          <span class="k-badge-sm">
-            ₩${(a.price||0).toLocaleString()}
-          </span>
 
-          <!-- 신청자와 동일 -->
-          <label class="k-badge-sm">
-            <input type="checkbox" class="f-copy"> 신청자와 동일
-          </label>
 
-          <!-- 삭제 버튼 -->
-          <button type="button" class="k-mapbtn btn-remove" title="신청자 삭제">삭제</button>
+        
+
+        
         </div>
       </div>
 
