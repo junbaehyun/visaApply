@@ -186,7 +186,7 @@
   <h2><span class="accent">비자 신청하기 </span></h2>
   <br/>
   <p>
-    아래 <b>코반 비자 신청서</b> 작성 후 <b>카카오 채팅</b>으로 <b>'신청완료'</b> 회신 부탁드립니다.
+    아래 <b>코반 비자 신청서</b> 작성 후 <b>카카오 채팅</b>으로 <b>'제출 서류'</b> 문의바랍니다.
   </p>
 
   <div class="btn-row">
@@ -541,24 +541,49 @@
   <!-- ========= /방글라데시비자 정보 탭 ========= -->
   
   
-    <!-- 상품 선택 -->
-    <div class="k-products" id="k-products">
-      <article class="k-prod" data-sku="tourist" data-price="100000">
-        <h4>관광비자</h4>
-        <div class="k-fe">유효 6개월 · 체류 30일</div>
-        <div class="k-price">₩100,000</div>
-      </article>
-      <article class="k-prod" data-sku="biz-single" data-price="100000">
-        <h4>비즈니스 단수</h4>
-        <div class="k-fe">유효 90일 · 1회 입국</div>
-        <div class="k-price">₩100,000</div>
-      </article>
-      <article class="k-prod" data-sku="biz-multi" data-price="130000">
-        <h4>비즈니스 복수</h4>
-        <div class="k-fe">유효 6–7개월 · 복수입국</div>
-        <div class="k-price">₩130,000</div>
-      </article>
-    </div>
+<!-- 상품 선택 -->
+<div class="k-products" id="k-products">
+  <article class="k-prod"
+    data-sku="tourist"
+    data-name="관광비자"
+    data-price="100000"
+    data-valid="6개월"
+    data-stay="30일"
+    data-proc="6박7일"
+  >
+    <h4>관광비자</h4>
+    <div class="k-fe">유효 6개월 · 체류 30일</div>
+    <div class="k-price">₩100,000</div>
+  </article>
+
+  <article class="k-prod"
+    data-sku="biz-single"
+    data-name="비즈니스 단수"
+    data-price="100000"
+    data-valid="90일"
+    data-stay="(케이스별 상이)"
+    data-proc="6박7일"
+  >
+    <h4>비즈니스 단수</h4>
+    <div class="k-fe">유효 90일 · 1회 입국</div>
+    <div class="k-price">₩100,000</div>
+  </article>
+
+  <article class="k-prod"
+    data-sku="biz-multi"
+    data-name="비즈니스 복수"
+    data-price="130000"
+    data-valid="6–7개월"
+    data-stay="(케이스별 상이)"
+    data-proc="6박7일"
+  >
+    <h4>비즈니스 복수</h4>
+    <div class="k-fe">유효 6–7개월 · 복수입국</div>
+    <div class="k-price">₩130,000</div>
+  </article>
+</div>
+
+    
 
     <style>
 
@@ -585,7 +610,7 @@
     
     <div class="k-sticky">
       <div class="k-total" id="k-total">선택된 상품: 없음</div>
-      <button class="k-apply" id="k-apply" type="button" disabled hidden>신청서 작성</button>
+      <button class="k-apply" id="k-apply" type="button" disabled>신청서 작성</button>
     </div>
   <!-- ✅ 자료 다운로드 버튼 영역 -->
   <div id="k-dlbar" class="k-dlbar" aria-label="자료 다운로드 버튼 영역"></div>
@@ -767,7 +792,7 @@
   </div>
 
   <div class="kaf-note" style="margin-top:6px">
-    영문 기입이 어려운 경우 한글 기입
+    여권의 한글/영문 실명과 동일하게 입력해 주세요.
   </div>
 
         
@@ -781,9 +806,9 @@
     
 
     <div class="kaf-grid">
-      <div class="kaf-label">성명</div>
+      <div class="kaf-label">성명(한/영)</div>
       <div class="kaf-field kaf-row">
-        <input class="kaf-input" id="f-nameEn" placeholder="GILDONG HONG">
+        <input class="kaf-input" id="f-nameEn" placeholder="예: 홍길동 / GILDONG HONG">
       </div>
     </div>
 
@@ -796,9 +821,9 @@
     </div>
 
     <div class="kaf-grid">
-      <div class="kaf-label">거주지 주소(영문)</div>
+      <div class="kaf-label">거주지 주소(한/영)</div>
       <div class="kaf-field kaf-row">
-        <input class="kaf-input" id="f-addrEn" placeholder="Seoul … (EN)">
+        <input class="kaf-input" id="f-addrEn" placeholder="예: 서울… / Seoul…">
       </div>
     </div>
 
@@ -998,6 +1023,44 @@
   </style>
 
 <script>
+(function () {
+    const wrap = document.getElementById("k-products");
+    if (!wrap) return;
+
+    const $name  = document.getElementById("kaf-product-name");
+    const $valid = document.getElementById("kaf-valid");
+    const $stay  = document.getElementById("kaf-stay");
+    const $proc  = document.getElementById("kaf-proc");
+
+    function setText(el, value, fallback = "-") {
+      if (!el) return;
+      const v = (value ?? "").toString().trim();
+      el.textContent = v || fallback;
+    }
+
+    function setActiveCard(clicked) {
+      wrap.querySelectorAll(".k-prod").forEach(el => el.classList.remove("is-selected"));
+      clicked.classList.add("is-selected");
+    }
+
+    wrap.addEventListener("click", (e) => {
+      const card = e.target.closest(".k-prod");
+      if (!card || !wrap.contains(card)) return;
+
+      setActiveCard(card);
+
+      // Read from data attributes
+      setText($name,  card.dataset.name);
+      setText($valid, card.dataset.valid);
+      setText($stay,  card.dataset.stay);
+      setText($proc,  card.dataset.proc, "6박7일");
+
+      // Optional: if you also want to store the selected sku/price for submit
+      // window.__selectedProduct = { sku: card.dataset.sku, price: Number(card.dataset.price || 0) };
+    });
+  })();
+
+
     // ===== 개인정보 동의 모달 로직 =====
     (function(){
       const consentBox = document.getElementById('kaf-consent-box');
@@ -1036,7 +1099,34 @@
         }
       });
     
-      function openModal(){ if (modal) modal.hidden = false; }
+      function openModal(){
+  if (!modal) return;
+
+  // ✅ 큐샵/빌더 환경 대응: 모달을 body로 이동시켜 fixed 기준을 뷰포트로 강제
+  if (modal.parentElement !== document.body) {
+    document.body.appendChild(modal);
+  }
+
+  modal.hidden = false;
+
+  // ✅ 혹시라도 위쪽에 떠 보이면 중앙으로 오도록 보정
+  requestAnimationFrame(() => {
+    const box = modal.querySelector('.k-modal-box');
+    box?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  });
+
+  // (선택) 배경 스크롤 방지
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  if (modal) modal.hidden = true;
+
+  // (선택) 스크롤 복구
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+}
+
       function closeModal(){ if (modal) modal.hidden = true; }
     
       // 모달: 확인 및 동의 → 체크 확정
@@ -1234,7 +1324,7 @@ document.getElementById("testAutoFillBtn")?.addEventListener("click", autoFillTe
 
     const applVisaSel = document.getElementById('f-visa');
 
-const bizFields   = document.getElementById('biz-fields');
+    const bizFields   = document.getElementById('biz-fields');
    // ===== 배송 주소 복사: 거주지 / 회사 주소 =====
    const homeCopyChk   = document.getElementById('f-copy-home');
     const officeCopyChk = document.getElementById('f-copy-office');
@@ -1469,14 +1559,34 @@ korbanFormBtn?.addEventListener('click', () => {
 
     // --- helper: 선택 상품
     function getSelectedProduct() {
-      const sel = document.querySelector('.k-prod.is-selected');
-      if (!sel) return null;
-      return {
-        sku: sel.dataset.sku,
-        name: sel.querySelector('h4')?.textContent ?? '',
-        price: Number(sel.dataset.price || 0)
-      };
-    }
+  const sel = document.querySelector('.k-prod.is-selected');
+  if (!sel) return null;
+
+  return {
+    sku: sel.dataset.sku,
+    name: sel.querySelector('h4')?.textContent ?? '',
+    price: Number(sel.dataset.price || 0),
+    valid: sel.dataset.valid || '-',
+    stay: sel.dataset.stay || '-',
+    proc: sel.dataset.proc || '6박7일',
+  };
+}
+
+function updateProductSummaryTableFromSelected() {
+  const p = getSelectedProduct();
+  if (!p) return;
+
+  const nameTd  = document.getElementById('kaf-product-name');
+  const validTd = document.getElementById('kaf-valid');
+  const stayTd  = document.getElementById('kaf-stay');
+  const procTd  = document.getElementById('kaf-proc');
+
+  if (nameTd)  nameTd.textContent  = p.name;
+  if (validTd) validTd.textContent = p.valid;
+  if (stayTd)  stayTd.textContent  = p.stay;
+  if (procTd)  procTd.textContent  = p.proc;
+}
+
   
     // --- 요약 계산
     function updateSummaryNow(){
@@ -1492,7 +1602,12 @@ korbanFormBtn?.addEventListener('click', () => {
       if (sumVatEl)   sumVatEl.textContent   = `${vat.toLocaleString()}원`;
       if (sumTotalEl) sumTotalEl.textContent = `${total.toLocaleString()}원`;
     }
-  
+    function updateSummaryAll(){
+    updateProductSummaryTableFromSelected();
+    if (typeof updateSummaryNow === "function") updateSummaryNow();
+  }
+  window.KORBAN_updateSummary = updateSummaryAll; // ✅ 외부에서도 쓰려고 전역으로 노출
+
     // --- 다운로드 링크 데이터 & 렌더
     const dlLinks = {
       tourist: [
@@ -1848,7 +1963,7 @@ applyBtn?.addEventListener('click', () => {
       </div>
 
       <div class="kaf-note" style="margin-top:6px">
-        영문 기입이 어려운 경우 한글 기입
+        여권의 영문 이름과 동일하게 작성해주세요.
       </div>
 
 
