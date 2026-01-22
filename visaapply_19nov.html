@@ -1,543 +1,1219 @@
 <section class="korban-visa">
   <style>
-.kaf-head-left{
-display:flex; align-items:center; gap:12px;
+   .korban-visa {
+     --brand-blue: #1f4b85;
+     --accent-green: #00a36a;
+     --accent-orange: #ff6a00;
+
+     --ink: #111827;
+     --muted: #6b7280;
+
+     --bg: #fff;
+     --card: #f9fafb;
+
+     --line: #e5e7eb;
+     --line-2: #eef0f2;
+
+     font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR,
+       Apple SD Gothic Neo, Helvetica, Arial, sans-serif;
+     color: var(--ink);
+     background: var(--bg);
+
+     max-width: 980px;
+     margin: 28px auto;
+     padding: 0 16px;
+   }
+
+   /* Brand bar */
+   .k-brandbar {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin: 0 0 14px;
+   }
+   .k-visa-logo {
+     width: 36px;
+     height: 36px;
+   }
+   .k-brandtxt {
+     font-weight: 800;
+     letter-spacing: 0.2px;
+     color: var(--brand-blue);
+   }
+   .k-pill {
+     font-size: 12px;
+     color: #fff;
+     background: var(--brand-blue);
+     padding: 4px 10px;
+     border-radius: 999px;
+     margin-left: 8px;
+   }
+
+   /* Cards / lists */
+   .k-card {
+     background: var(--card);
+     border: 1px solid var(--line);
+     border-radius: 16px;
+     padding: 20px;
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+     margin-top: 18px;
+   }
+   .k-title {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     margin: 0 0 12px;
+     font-weight: 800;
+     font-size: 22px;
+   }
+   .k-list {
+     display: grid;
+     gap: 14px;
+     margin: 16px 0;
+     padding: 0;
+     list-style: none;
+   }
+   .k-li {
+     background: #fff;
+     border: 1px solid var(--line-2);
+     border-radius: 12px;
+     padding: 16px 14px;
+     display: grid;
+     gap: 6px;
+   }
+   .k-li h3 {
+     margin: 0;
+     font-size: 16px;
+     font-weight: 800;
+   }
+   .k-li p {
+     margin: 0;
+     color: var(--muted);
+     font-size: 13.5px;
+   }
+
+   /* Download bar buttons (k-dlbar) */
+   .k-dlbar {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 8px;
+     margin: 10px 0 14px;
+   }
+   .k-dlbtn {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+
+     background: var(--brand-blue);
+     color: #fff;
+
+     border: none;
+     border-radius: 10px;
+     padding: 9px 13px;
+
+     font-weight: 800;
+     font-size: 14px;
+     cursor: pointer;
+     text-decoration: none;
+
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+   }
+   .k-dlbtn:hover {
+     filter: brightness(0.96);
+   }
+   .k-dlico {
+     width: 18px;
+     height: 18px;
+   }
+
+   /* Products */
+   .k-products {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 14px;
+     margin: 12px 0 18px;
+   }
+   .k-prod {
+     background: #fff;
+     border: 2px solid var(--line);
+     border-radius: 14px;
+     padding: 16px;
+     cursor: pointer;
+     transition: 0.15s;
+   }
+   .k-prod:hover {
+     border-color: var(--brand-blue);
+   }
+   .k-prod h4 {
+     margin: 0 0 6px;
+     font-size: 16px;
+     font-weight: 800;
+   }
+   .k-fe {
+     color: var(--muted);
+     font-size: 13.5px;
+   }
+   .k-price {
+     margin-top: 10px;
+     font-weight: 900;
+     color: var(--brand-blue);
+   }
+   .k-prod.is-selected {
+     background: #eef4ff;
+     border-color: var(--brand-blue);
+     box-shadow: 0 0 0 3px rgba(31, 75, 133, 0.08) inset;
+   }
+
+   @media (max-width: 680px) {
+     .k-products {
+       grid-template-columns: 1fr 1fr;
+     }
+   }
+   @media (max-width: 480px) {
+     .k-products {
+       grid-template-columns: 1fr;
+     }
+   }
+
+   /* Sticky bar */
+   .k-sticky {
+     position: sticky;
+     bottom: 0;
+     background: #fff;
+     border-top: 1px solid var(--line);
+     padding: 12px 14px;
+
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+   }
+   .k-total {
+     font-weight: 800;
+   }
+   .k-apply {
+     background: var(--brand-blue);
+     color: #fff;
+     border: none;
+     border-radius: 10px;
+     padding: 10px 16px;
+     font-weight: 800;
+     cursor: pointer;
+   }
+   .k-apply:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+   }
+
+   /* Scroll margin for apply form */
+   #k-apply-form {
+     scroll-margin-top: 96px;
+   }
+
+   /* =========================
+      visa-download section styles
+      ========================= */
+   .visa-download {
+     --brand-blue: #1f4b85;
+     --brand-blue-hover: #163a66;
+
+     --kakao-yellow: #fee500;
+     --kakao-brown: #3c1e1e;
+
+     --ink: #111827;
+     --muted: #374151;
+     --border: #e5e7eb;
+     --soft: #f9fafb;
+     --panel: #ffffff;
+
+     max-width: 900px;
+     margin: 3px auto;
+     padding: 36px 20px;
+     text-align: center;
+
+     background: var(--soft);
+     border: 1px solid var(--border);
+     border-radius: 16px;
+
+     font-family: system-ui, -apple-system, Noto Sans KR, Roboto, sans-serif;
+   }
+
+   .visa-download h2 {
+     margin: 0 0 10px;
+     font-size: 30px;
+     font-weight: 900;
+     color: #111827;
+     letter-spacing: -0.2px;
+   }
+   .visa-download h2 .accent {
+     display: block;
+     color: var(--brand-blue);
+     font-size: 34px;
+   }
+   .visa-download p {
+     margin: 10px 0 20px;
+     font-size: 15px;
+     line-height: 1.7;
+     color: var(--muted);
+   }
+
+   .btn-row {
+     display: flex;
+     gap: 12px;
+     justify-content: center;
+     flex-wrap: wrap;
+     margin-bottom: 8px;
+   }
+   .btn {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+
+     padding: 14px 22px;
+     border-radius: 12px;
+
+     font-weight: 800;
+     font-size: 15px;
+
+     text-decoration: none;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+     transition: 0.18s ease;
+
+     border: 1px solid transparent;
+   }
+   .btn svg {
+     width: 18px;
+     height: 18px;
+   }
+
+   .btn-download {
+     background: var(--brand-blue);
+     color: #fff;
+   }
+   .btn-download:hover {
+     background: var(--brand-blue-hover);
+     transform: translateY(-1px);
+   }
+
+   .btn-kakao {
+     background: var(--kakao-yellow);
+     color: var(--kakao-brown);
+     border-color: #e6d200;
+   }
+   .btn-kakao:hover {
+     filter: brightness(0.98);
+     transform: translateY(-1px);
+   }
+
+   .sub-hint {
+     font-size: 13px;
+     color: #6b7280;
+     margin-top: 4px;
+   }
+
+   .vd-sep {
+     height: 1px;
+     background: linear-gradient(90deg, transparent, #e9edf3, transparent);
+     margin: 14px 0;
+   }
+
+   /* Safety: ensure visa-download never becomes its own scroll container */
+   .visa-download {
+     overflow: visible !important;
+     height: auto !important;
+     max-height: none !important;
+     -webkit-overflow-scrolling: auto !important;
+     overscroll-behavior: auto !important;
+     scroll-snap-type: none !important;
+     touch-action: auto !important;
+   }
+   .visa-download:where(.section, .panel, .card) {
+     overflow: visible !important;
+     height: auto !important;
+   }
+   .visa-download * {
+     max-height: none !important;
+     overflow: visible !important;
+     -webkit-overflow-scrolling: auto !important;
+   }
+
+   /* =========================
+      Info Tabs
+      ========================= */
+   .k-info-tabs {
+     margin-top: 10px;
+   }
+
+   .k-info-tabs .tabbar {
+     display: flex;
+     gap: 28px;
+     border-bottom: 1px solid var(--line);
+     margin: 10px 0 16px;
+   }
+
+   .k-info-tabs .tabbar button {
+     background: none;
+     border: none;
+     padding: 12px 2px 10px;
+     font-weight: 800;
+     cursor: pointer;
+     color: #374151;
+     position: relative;
+   }
+
+   .k-info-tabs .tabbar button.active {
+     color: var(--brand-blue);
+   }
+
+   .k-info-tabs .tabbar button.active::after {
+     content: "";
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: -1px;
+     height: 3px;
+     background: var(--brand-blue);
+     border-radius: 99px;
+   }
+
+   .k-pane-wrap {
+     background: #f8fafc;
+     border: 1px solid var(--line);
+     border-radius: 14px;
+     padding: 18px;
+   }
+
+   .k-pane {
+     display: none;
+   }
+   .k-pane.active {
+     display: block;
+   }
+
+   .k-flag {
+     width: 44px;
+     height: 30px;
+     border-radius: 4px;
+     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;
+     margin-right: 10px;
+   }
+
+   .k-note {
+     font-size: 14px;
+     color: #374151;
+     line-height: 1.7;
+   }
+   .k-note b {
+     font-weight: 900;
+   }
+
+   /* Process steps (responsive grid) */
+   .k-steps {
+     display: grid;
+     gap: 14px;
+     grid-template-columns: repeat(4, 1fr);
+   }
+
+   @media (max-width: 1024px) {
+     .k-steps {
+       grid-template-columns: repeat(2, 1fr);
+     }
+   }
+   @media (max-width: 640px) {
+     .k-steps {
+       grid-template-columns: 1fr;
+     }
+   }
+
+   .k-step {
+     background: #fff;
+     border: 1px solid var(--line);
+     border-radius: 14px;
+
+     padding: 16px;
+     display: flex;
+     gap: 12px;
+     align-items: flex-start;
+
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+   }
+
+   .k-step .num {
+     min-width: 28px;
+     height: 28px;
+     border-radius: 50%;
+     background: var(--brand-blue);
+     color: #fff;
+     font-weight: 900;
+     font-size: 12px;
+
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 2px;
+   }
+
+   .k-step .head {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin-bottom: 6px;
+   }
+
+   .k-step h4 {
+     margin: 0;
+     font-size: 15px;
+     font-weight: 900;
+     color: #111827;
+   }
+
+   .k-step .ico {
+     width: 22px;
+     height: 22px;
+     color: var(--brand-blue);
+   }
+
+   .k-step p {
+     margin: 0;
+     font-size: 13.5px;
+     color: #374151;
+     line-height: 1.6;
+   }
+
+   .btn-kakao-mini {
+     display: inline-flex;
+     align-items: center;
+     gap: 6px;
+     margin-top: 10px;
+
+     padding: 9px 12px;
+     border-radius: 10px;
+
+     background: #fee500;
+     color: #3c1e1e;
+     border: 1px solid #e6d200;
+
+     font-weight: 800;
+     font-size: 12.5px;
+     text-decoration: none;
+   }
+   .btn-kakao-mini svg {
+     width: 16px;
+     height: 16px;
+   }
+
+   .k-tip {
+     margin-top: 14px;
+     background: #f9fafb;
+     border: 1px dashed var(--line);
+     border-radius: 12px;
+     padding: 12px 14px;
+     color: #374151;
+     font-size: 13.5px;
+   }
+   .k-tip b {
+     font-weight: 900;
+     color: #111827;
+   }
+   .k-tip .addr {
+     display: block;
+     margin-top: 6px;
+     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+     font-size: 13px;
+   }
+   .k-note {
+     margin-top: 8px;
+     color: #6b7280;
+     font-size: 12.5px;
+   }
+
+   /* =========================
+      Apply form styles
+      ========================= */
+   .k-apply-form {
+     margin-top: 18px;
+   }
+
+   .kaf-card {
+     background: #fff;
+     border: 1px solid var(--line);
+     border-radius: 16px;
+   }
+
+   .kaf-head {
+     padding: 16px 18px;
+     border-bottom: 1px solid var(--line);
+     font-size: 22px;
+     font-weight: 900;
+   }
+
+   .kaf-body {
+     padding: 18px;
+   }
+
+   .kaf-table {
+     width: 100%;
+     border-collapse: collapse;
+     background: #fafafa;
+     border: 1px solid var(--line);
+     border-radius: 10px;
+     overflow: hidden;
+   }
+
+   .kaf-table th,
+   .kaf-table td {
+     padding: 12px 10px;
+     border-bottom: 1px solid #eee;
+     font-size: 14px;
+     text-align: left;
+   }
+
+   .kaf-section {
+     margin-top: 16px;
+     border: 1px solid var(--line);
+     border-radius: 12px;
+     overflow: hidden;
+   }
+
+   .kaf-section h3 {
+     margin: 0;
+     padding: 12px 14px;
+     background: #f9fafb;
+     border-bottom: 1px solid var(--line);
+     font-size: 16px;
+     font-weight: 900;
+   }
+
+   .kaf-grid {
+     display: grid;
+     grid-template-columns: 160px 1fr;
+     align-items: center;
+     border-bottom: 1px solid var(--line);
+   }
+   .kaf-grid:last-child {
+     border-bottom: none;
+   }
+
+   .kaf-label {
+     padding: 12px 14px;
+     background: #fff;
+     font-weight: 700;
+     font-size: 14px;
+   }
+
+   .kaf-field {
+     padding: 10px;
+   }
+
+   .kaf-input,
+   .kaf-select {
+     width: 100%;
+     padding: 12px;
+     border: 1px solid #d1d5db;
+     border-radius: 10px;
+     font-size: 14px;
+   }
+
+   .kaf-row {
+     display: flex;
+     gap: 8px;
+   }
+
+   .kaf-note {
+     font-size: 12.5px;
+     color: #6b7280;
+     margin-top: 6px;
+   }
+
+   .kaf-radio {
+     display: flex;
+     gap: 24px;
+     flex-wrap: wrap;
+   }
+   .kaf-radio label {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     font-weight: 700;
+   }
+
+   .kaf-summary {
+     background: #f9fafb;
+     border: 1px solid var(--line);
+     border-radius: 12px;
+     padding: 14px;
+     margin-top: 14px;
+   }
+   .kaf-summary .row {
+     display: flex;
+     justify-content: space-between;
+     margin: 6px 0;
+     font-size: 14px;
+   }
+   .kaf-summary .total {
+     background: #fff3d7;
+     border: 1px solid #fde68a;
+     border-radius: 10px;
+     padding: 10px 12px;
+     font-weight: 900;
+   }
+
+   .kaf-consent {
+     margin-top: 10px;
+     display: flex;
+     gap: 10px;
+     align-items: flex-start;
+   }
+
+   .kaf-paybtn {
+     margin-top: 16px;
+     background: #5b21b6;
+     border: none;
+     color: #fff;
+     width: 100%;
+     padding: 16px;
+     border-radius: 12px;
+     font-size: 18px;
+     font-weight: 900;
+     cursor: pointer;
+   }
+   .kaf-paybtn:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+   }
+
+   .k-badge-sm {
+     display: inline-flex;
+     align-items: center;
+     gap: 6px;
+     padding: 6px 10px;
+     border-radius: 999px;
+     border: 1px dashed var(--line);
+     font-size: 12px;
+   }
+
+   .k-mapbtn {
+     margin-left: 8px;
+     padding: 8px 10px;
+     border: 1px solid var(--line);
+     border-radius: 10px;
+     background: #fff;
+     cursor: pointer;
+   }
+
+   @media (max-width: 720px) {
+     .kaf-grid {
+       grid-template-columns: 1fr;
+     }
+     .kaf-label {
+       border-bottom: 1px solid var(--line);
+     }
+   }
+
+   /* =========================
+      Modal styles
+      ========================= */
+   .k-modal {
+     position: fixed;
+     inset: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 9999;
+   }
+   .k-modal[hidden] {
+     display: none;
+   }
+
+   .k-modal-backdrop {
+     position: absolute;
+     inset: 0;
+     background: rgba(0, 0, 0, 0.45);
+   }
+
+   .k-modal-box {
+     position: relative;
+     background: #fff;
+     border-radius: 14px;
+     padding: 20px;
+     max-width: 560px;
+     width: 92%;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+     z-index: 1;
+   }
+
+   .k-modal-title {
+     margin: 0 0 12px;
+     font-size: 18px;
+     font-weight: 900;
+     color: #111827;
+   }
+
+   .k-modal-body {
+     font-size: 14px;
+     color: #374151;
+     line-height: 1.7;
+     max-height: 60vh;
+     overflow: auto;
+   }
+
+   .k-modal-body h3 {
+     margin: 12px 0 6px;
+     font-size: 15px;
+     font-weight: 800;
+     color: #111827;
+   }
+
+   .k-modal-body ul {
+     margin: 6px 0 10px 18px;
+   }
+
+   .k-modal-note {
+     margin-top: 8px;
+     color: #6b7280;
+   }
+
+   .k-modal-actions {
+     display: flex;
+     justify-content: flex-end;
+     gap: 10px;
+     margin-top: 14px;
+   }
+
+   .k-btn-yes {
+     background: var(--brand-blue);
+     color: #fff;
+     padding: 9px 16px;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     font-weight: 800;
+   }
+
+   .k-btn-no {
+     background: #e5e7eb;
+     color: #111827;
+     padding: 9px 16px;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     font-weight: 800;
+   }
+
+   .k-visa-logo {
+font-size: 36px;
+width: 48px;
+height: 48px;
+text-align: center;
+}/* =========================================================
+ ✨ NEW YEAR: Firework / Sparkle Layer
+ (Dec 31 ~ Jan 6 friendly, no Xmas symbols)
+========================================================= */
+.xmas-visa .newyear-layer{
+position:absolute;
+inset:0;
+z-index:1; /* same as snow */
+pointer-events:none;
+overflow:hidden;
 }
-.btn.btn-download {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 10px 16px;
-background: var(--brand-blue);
-color: #fff;
-border-radius: 8px;
-font-weight: 600;
-text-decoration: none;
-transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+/* Firework burst 1 */
+.xmas-visa .newyear-layer::after{
+content:"🎆";
+font-size:52px;
+
+position:absolute;
+top: 14%;
+left: -160px;
+
+opacity:.0;
+filter: drop-shadow(0 14px 16px rgba(0,0,0,.35));
+will-change: transform, opacity;
+animation: ny-fly 22s linear infinite;
 }
 
-.btn.btn-download:hover {
-background: #163a68; /* 조금 더 어두운 블루 */
-transform: translateY(-2px);
-box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-cursor: pointer;
+/* Firework burst 2 (smaller, different path) */
+.xmas-visa .newyear-layer::before{
+content:"✨";
+font-size:40px;
+
+position:absolute;
+top: 26%;
+left: -220px;
+
+opacity:.0;
+filter: drop-shadow(0 12px 14px rgba(0,0,0,.25));
+will-change: transform, opacity;
+animation: ny-fly-2 28s linear infinite;
 }
 
-.btn.btn-download:active {
-transform: translateY(0);
-box-shadow: 0 3px 7px rgba(0,0,0,0.12);
+@keyframes ny-fly{
+0%   { transform: translate3d(0, 12px, 0) rotate(8deg); opacity:0; }
+10%  { opacity:.95; }
+45%  { transform: translate3d(55vw, -30px, 0) rotate(-6deg); }
+80%  { transform: translate3d(92vw, -8px, 0) rotate(4deg); opacity:.9; }
+100% { transform: translate3d(130vw, 14px, 0) rotate(2deg); opacity:0; }
+}
+
+@keyframes ny-fly-2{
+0%   { transform: translate3d(0, 8px, 0) rotate(-6deg); opacity:0; }
+12%  { opacity:.75; }
+55%  { transform: translate3d(62vw, -20px, 0) rotate(6deg); }
+85%  { transform: translate3d(98vw, -6px, 0) rotate(-2deg); opacity:.65; }
+100% { transform: translate3d(140vw, 10px, 0) rotate(2deg); opacity:0; }
+}
+
+/* =========================================================
+ Brand icon + pill (New Year vibe)
+========================================================= */
+.xmas-visa .k-visa-logo{
+width:46px;height:46px;border-radius:16px;display:grid;place-items:center;font-size:30px;
+background:
+  radial-gradient(circle at 30% 25%, rgba(255,255,255,.38), transparent 60%),
+  linear-gradient(135deg, rgba(140,180,255,.55), rgba(245,204,98,.55), rgba(213,59,59,.35));
+box-shadow:0 16px 40px rgba(2,6,23,.28);
+transform:translateY(-1px);
+}
+
+.xmas-visa .k-pill{
+margin-left:auto;padding:9px 12px;border-radius:999px;font-weight:900;font-size:12px;letter-spacing:.8px;
+color:rgba(11,16,32,.92);
+background:linear-gradient(135deg, rgba(245,204,98,.96), rgba(255,240,190,.92));
+border:1px solid rgba(255,255,255,.28);
+box-shadow:0 14px 32px rgba(2,6,23,.20)
+}
+
+/* =========================================================
+ Accent (swap from Xmas red to "new-year glow")
+========================================================= */
+.xmas-visa .visa-download .accent{
+background: linear-gradient(90deg,
+  rgba(140,180,255,1) 10%,
+  rgba(245,204,98,1) 50%,
+  rgba(140,180,255,1) 90%
+);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+filter: drop-shadow(0 0 6px rgba(140,180,255,.35));
+}
+
+/* Separator: celebratory but not Xmas */
+.xmas-visa .vd-sep{
+margin-top:16px;
+height:10px;
+border-radius:999px;
+background: linear-gradient(90deg,
+  rgba(140,180,255,.95),
+  rgba(245,204,98,.95),
+  rgba(31,157,106,.95)
+);
+opacity:1;
+box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 10px rgba(140,180,255,.22);
 }
 
 
-    .chip {
-display:inline-flex;
-align-items:center;
-gap:6px;
-padding:6px 12px;
-background:#f3f4f6;
-border-radius:20px;
-cursor:pointer;
-font-size:14px;
-margin-right:6px;
-}
-.chip input {
-accent-color: var(--brand-blue);
-}
+ </style>
+ <section class="korban-visa xmas-visa">
+<div class="snow" aria-hidden="true"></div>
+<div class="newyear-layer" aria-hidden="true"></div>
 
-    
-    .korban-visa{
-      --brand-blue:#1f4b85; --accent-green:#00a36a; --accent-orange:#ff6a00;
-      --ink:#111827; --muted:#6b7280; --bg:#fff; --card:#f9fafb;
-      --line:#e5e7eb; --line-2:#eef0f2;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,Apple SD Gothic Neo,Helvetica,Arial,sans-serif;
-      color:var(--ink); background:var(--bg); max-width:980px; margin:28px auto; padding:0 16px;
-    }
-    .k-brandbar{display:flex;align-items:center;gap:12px;margin:0 0 14px}
-    .k-visa-logo{width:36px;height:36px}
-    .k-brandtxt{font-weight:800;letter-spacing:.2px;color:var(--brand-blue)}
-    .k-pill{font-size:12px;color:#fff;background:var(--brand-blue);padding:4px 10px;border-radius:999px;margin-left:8px}
-
-    .k-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);margin-top:18px}
-    .k-title{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:800;font-size:22px}
-    .k-list{display:grid;gap:14px;margin:16px 0;padding:0;list-style:none}
-    .k-li{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 14px;display:grid;gap:6px}
-    .k-li h3{margin:0;font-size:16px;font-weight:800}
-    .k-li p{margin:0;color:var(--muted);font-size:13.5px}
-    .k-download{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:var(--brand-blue);color:#fff;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:700}
-
-
-  </style>
-
-  <style>
-  .k-dlbar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-  .k-dlbtn{
-    display:inline-flex;align-items:center;gap:8px;
-    background:#1f4b85;color:#fff;border:none;border-radius:10px;
-    padding:9px 13px;font-weight:800;font-size:14px;cursor:pointer;
-    text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,.08)
-  }
-  .k-dlbtn:hover{filter:brightness(.96)}
-  .k-dlico{width:18px;height:18px}
-</style>
-
-  <!-- Brand bar -->
-  <div class="k-brandbar">
-    <svg class="k-visa-logo" viewBox="0 0 48 48" fill="none">
-      <rect x="6" y="8" width="24" height="32" rx="3" fill="#1f4b85" opacity=".12"/>
-      <rect x="6" y="8" width="24" height="32" rx="3" stroke="#1f4b85" stroke-width="2"/>
-      <circle cx="18" cy="18" r="6" stroke="#1f4b85" stroke-width="2"/>
-      <path d="M8 30h20" stroke="#00a36a" stroke-width="2"/>
-      <path d="M30 28l12-4M30 28l6 6M30 28l-2 8" stroke="#ff6a00" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <div class="k-brandtxt">KORBAN VISA</div>
-    <span class="k-pill">VISA SERVICE</span>
-  </div>
-<section class="visa-download">
-<style>
-  
-  .visa-download{
-    --brand-blue:#1f4b85;          /* 다운로드 버튼 */
-    --brand-blue-hover:#163a66;
-    --kakao-yellow:#FEE500;        /* 카카오 버튼 */
-    --kakao-brown:#3C1E1E;
-    --ink:#111827;
-    --muted:#374151;
-    --border:#e5e7eb;
-    --soft:#f9fafb;
-    --panel:#ffffff;
-    max-width:900px;margin:3px auto;padding:36px 20px;text-align:center;
-    background:var(--soft);border:1px solid var(--border);border-radius:16px;
-    font-family:system-ui,-apple-system,Noto Sans KR,Roboto,sans-serif
-  }
-    .k-product-highlight {
-border-color: var(--accent-orange) !important;
-box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.4);
-background: #fff7ec;
-animation: kVisaBlink 0.5s ease-in-out 0s 3;
-}
-
-@keyframes kVisaBlink {
-0%   { box-shadow: 0 0 0 0 rgba(255,106,0,0.0); }
-50%  { box-shadow: 0 0 10px 2px rgba(255,106,0,0.6); }
-100% { box-shadow: 0 0 0 0 rgba(255,106,0,0.0); }
-}
-  
-  .visa-download h2{margin:0 0 10px;font-size:30px;font-weight:900;color:#111827;letter-spacing:-.2px}
-  .visa-download h2 .accent{display:block;color:var(--brand-blue);font-size:34px}
-  .visa-download p{margin:10px 0 20px;font-size:15px;line-height:1.7;color:var(--muted)}
-
-  .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:12px;
-       font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,.08);transition:.18s ease; border:1px solid transparent}
-  .btn svg{width:18px;height:18px}
-  /* 다운로드(블루) */
-  .btn-download{background:var(--brand-blue);color:#fff}
-  .btn-download:hover{background:var(--brand-blue-hover);transform:translateY(-1px)}
-  /* 카카오(노란색) */
-  .btn-kakao{background:var(--kakao-yellow);color:var(--kakao-brown);border-color:#e6d200}
-  .btn-kakao:hover{filter:brightness(.98);transform:translateY(-1px)}
-
-  /* ── 추가: 바로작성 카드 & 버튼 ───────────────────────── */
-  .inline-card{
-    background:var(--panel); border:1px solid var(--border); border-radius:14px;
-    padding:16px 18px; margin-top:14px; text-align:left;
-    box-shadow:0 6px 18px rgba(2,6,23,.05); max-width:780px; margin-left:auto; margin-right:auto;
-  }
-  .inline-card .ic-head{display:flex; align-items:center; gap:10px; margin-bottom:6px}
-  .inline-card .ic-ico{width:22px;height:22px;color:var(--brand-blue)}
-  .inline-card p{margin:6px 0 12px;color:#374151}
-  .inline-card .btn-row{justify-content:flex-start; margin-top:6px}
-
-  .btn-live{
-    background:#fff; color:var(--brand-blue); border-color:#d7e2f3;
-  }
-  .btn-live:hover{background:#f6f9ff; transform:translateY(-1px)}
-  .sub-hint{font-size:13px;color:#6b7280;margin-top:4px}
-  .vd-sep{height:1px;background:linear-gradient(90deg,transparent,#e9edf3,transparent);margin:14px 0}
-  @media (max-width:560px){
-    .inline-card{padding:14px}
-    .inline-card .btn-row{justify-content:center}
-  }
-/* 🚫 Make sure .visa-download never becomes a scroll container */
-.visa-download{
-overflow: visible !important;
-height: auto !important;
-max-height: none !important;
--webkit-overflow-scrolling: auto !important; /* iOS: disable momentum scroll on the element */
-overscroll-behavior: auto !important;        /* allow scroll to propagate to the page */
-scroll-snap-type: none !important;           /* if a global snap is applied */
-touch-action: auto !important;               /* if a global touch lock exists */
-}
-
-/* In case a wrapper around it is forcing a scroll area */
-.visa-download:where(.section, .panel, .card){
-overflow: visible !important;
-height: auto !important;
-}
-
-/* Safety: children shouldn’t create their own scroll areas either */
-.visa-download *{
-max-height: none !important;
-overflow: visible !important;
--webkit-overflow-scrolling: auto !important;
-}
-</style>
-
-<h2><span class="accent">비자 신청하기 </span></h2>
-<br/>
-<p>
-  아래 <b>코반 비자 신청서</b> 작성 후 <b>카카오 채팅</b>으로 <b>'제출 서류'</b> 문의바랍니다.
-</p>
-
-<div class="btn-row">
- 
-  <a class="btn btn-download"  id="korbanFormBtn" rel="noopener">
-    <!-- 다운 아이콘 -->
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-width="2" stroke-linecap="round"/>
-      <path d="M7 10l5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12 15V3" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    코반 신청서
-  </a>
-
-  <!-- ② 카카오 채팅 연결: 채널/오픈채팅 URL로 교체 -->
-  <a class="btn btn-kakao" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
-    <!-- 말풍선 아이콘 -->
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
-    </svg>
-    카카오 채팅 연결
-  </a>
+<!-- Brand bar -->
+<div class="k-brandbar">
+  <span class="k-visa-logo" aria-hidden="true">✨</span>
+  <div class="k-brandtxt">KORBAN VISA</div>
+  <span class="k-pill">HAPPY 2026</span>
 </div>
 
-<div class="sub-hint">(신청 인원에 맞춰 <b>각 인원별</b>로 작성 바랍니다.)</div>
+<section class="visa-download">
+  <h2><span class="accent">비자 신청 안내</span></h2>
+  <p>
+    새해 복 많이 받으세요~ <br/>
+    아래 <b>코반 비자 신청서</b>작성 후 <b>카카오 채팅으로 서류 제출</b> 부탁드립니다.
+  </p>
 
-<div class="vd-sep" aria-hidden="true"></div>
+  <div class="btn-row">
+    <!-- <a class="btn btn-download"
+       href="https://drive.google.com/drive/folders/1uvG9627K2D21NIt9cLTlXniqu0QY4IGd?usp=sharing"
+       target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-width="2" stroke-linecap="round"/>
+        <path d="M7 10l5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 15V3" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      코반 신청서
+    </a> -->
 
+    <a class="btn btn-kakao" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+      </svg>
+      카카오 채팅 연결
+    </a>
+  </div>
 
+  <div class="sub-hint">(신청 인원에 맞춰 <b>각 인원별</b>로 작성 바랍니다.)</div>
+  <div class="vd-sep" aria-hidden="true"></div>
+</section>
 </section>
 
- <!-- ========= 방글라데시비자 정보 탭 (공지/협정/입국/진행과정) ========= -->
-<section class="k-info-tabs" aria-label="방글라데시비자 안내">
-  <style>
-    .k-info-tabs{margin-top:10px}
-    .k-info-tabs .tabbar{display:flex;gap:28px;border-bottom:1px solid var(--line);margin:10px 0 16px}
-    .k-info-tabs .tabbar button{
-      background:none;border:none;padding:12px 2px 10px;font-weight:800;cursor:pointer;
-      color:#374151; position:relative
-    }
-    .k-info-tabs .tabbar button.active{color:var(--brand-blue)}
-    .k-info-tabs .tabbar button.active::after{
-      content:""; position:absolute; left:0; right:0; bottom:-1px; height:3px;
-      background:var(--brand-blue); border-radius:99px;
-    }
-    .k-pane-wrap{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:18px}
-    .k-pane{display:none}
-    .k-pane.active{display:block}
-    .k-flag{width:44px;height:30px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;margin-right:10px}
-    .k-note{font-size:14px;color:#374151;line-height:1.7}
-    .k-note b{font-weight:900}
-    /* 진행과정(타임라인) */
-    .k-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:center}
-    .k-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;align-items:center;gap:10px}
-    .k-step h4{margin:0;font-size:14px;font-weight:900;color:#111827}
-    .k-step p{margin:2px 0 0;font-size:12.5px;color:#6b7280}
-    .k-arrow{display:flex;align-items:center;justify-content:center;color:#9aa3af}
-    .k-step .ico{width:22px;height:22px;color:var(--brand-blue)}
-    @media (max-width:860px){
-      .k-steps{grid-template-columns:1fr;gap:8px}
-      .k-arrow{display:none}
-    }
-  </style>
 
-  <!-- 탭 바 -->
-  <div class="tabbar" role="tablist">
-    <button class="tabbtn active" data-tab="notice" role="tab" aria-controls="k-tab-notice">공지사항</button>
-    <button class="tabbtn" data-tab="agreement" role="tab" aria-controls="k-tab-agreement">비자 사증 협정</button>
-    <button class="tabbtn" data-tab="entry" role="tab" aria-controls="k-tab-entry">입국정보</button>
-    <button class="tabbtn" data-tab="process" role="tab" aria-controls="k-tab-process">예약진행과정</button>
-    <button class="tabbtn" data-tab="korban" role="tab" aria-controls="k-tab-korban">Why</button>
 
-  </div>
+  <!-- ========= 방글라데시비자 정보 탭 (공지/협정/입국/진행과정) ========= -->
+ <section class="k-info-tabs" aria-label="방글라데시비자 안내">
+  
+ 
+   <!-- 탭 바 -->
+   <div class="tabbar" role="tablist">
+     <button class="tabbtn active" data-tab="notice" role="tab" aria-controls="k-tab-notice">공지사항</button>
+     <button class="tabbtn" data-tab="agreement" role="tab" aria-controls="k-tab-agreement">비자 사증 협정</button>
+     <button class="tabbtn" data-tab="entry" role="tab" aria-controls="k-tab-entry">입국정보</button>
+     <button class="tabbtn" data-tab="process" role="tab" aria-controls="k-tab-process">예약진행과정</button>
+     <button class="tabbtn" data-tab="korban" role="tab" aria-controls="k-tab-korban">Why</button>
 
-  <div class="k-pane-wrap">
-    <!-- 공지사항 -->
-    <div id="k-tab-notice" class="k-pane active" role="tabpanel">
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <!-- 방글라데시 국기 -->
-        <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
-        </svg>
-        <div class="k-note">
-          <p><b>&lt;방글라데시 비자&gt;</b></p>
-          <p>○ 방글라데시 비자 발급은 대사관 심사 후 발급되며, 통상 5~7 영업일이 소요됩니다.<br/>
-             ○ 비자 발급 후, 여권은 등기우편으로 발송해 드리며, 퀵서비스 및 방문수령도 가능합니다.<br/>
-             ○ 비지니스 단수의 경우 통상 30일 체류 가능하며 그 이상은 명확한 이유가 필요합니다.<br/>
-             ○ 5년이상된 여권의 경우 제출하는 실물 사진이 같을 시 최근 사진 요청 될 수 있습니다.   
-        </div>
-      </div>
-    </div>
+   </div>
+ 
+   <div class="k-pane-wrap">
+     <!-- 공지사항 -->
+     <div id="k-tab-notice" class="k-pane active" role="tabpanel">
+       <div style="display:flex;align-items:flex-start;gap:12px">
+         <!-- 방글라데시 국기 -->
+         <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+           <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+         </svg>
+         <div class="k-note">
+           <p><b>&lt;방글라데시 비자&gt;</b></p>
+           <p>🚨 긴급공지 🚨 방글라데시, 도착비자(Visa on Arrival) 전면 중단 (2026년 1월 15일 ~ 2월 15일)<br/>
+             🚨 긴급공지 🚨 비지니스 비자 요청 서류 대사관 미공지 변경 (2026년 1월 21일 ~ 진행시 개별 안내 드립니다)<br/>
+             ○ 방글라데시 비자 발급은 대사관 심사 후 발급되며, 통상 5~7 영업일이 소요됩니다.<br/>
+              ○ 비자 발급 후, 여권은 등기우편으로 발송해 드리며, 퀵서비스 및 방문수령도 가능합니다.<br/>
+              ○ 비지니스 단수의 경우 통상 30일 체류 가능하며 그 이상은 명확한 이유가 필요합니다.<br/>
+              ○ 5년이상된 여권의 경우 제출하는 실물 사진이 같을 시 최근 사진 요청 될 수 있습니다.   
+         </div>
+       </div>
+     </div>
+ 
+     <!-- 비자 사증 협정 -->
+     <div id="k-tab-agreement" class="k-pane" role="tabpanel">
+       <div style="display:flex;align-items:flex-start;gap:12px">
+         <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+           <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+         </svg>
+         <div class="k-note">
+           일반[전자]여권을 소지한 대한민국 국적자는 입국 전 비자를 취득해야 합니다.<br/>
+           외교관·관용여권을 소지한 대한민국 국적자는 90일 비자협정체결 국가로 비자 없이 입국이 가능합니다.
+         </div>
+       </div>
+     </div>
 
-    <!-- 비자 사증 협정 -->
-    <div id="k-tab-agreement" class="k-pane" role="tabpanel">
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
-        </svg>
-        <div class="k-note">
-          일반[전자]여권을 소지한 대한민국 국적자는 입국 전 비자를 취득해야 합니다.<br/>
-          외교관·관용여권을 소지한 대한민국 국적자는 90일 비자협정체결 국가로 비자 없이 입국이 가능합니다.
-        </div>
-      </div>
-    </div>
-
-   <!-- Why KORBAN -->
+    <!-- Why KORBAN -->
 <div id="k-tab-korban" class="k-pane" role="tabpanel">
-<div style="display:flex;align-items:flex-start;gap:12px">
-  <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="16" height="10" fill="#006a4e"/>
-    <circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
-  </svg>
+ <div style="display:flex;align-items:flex-start;gap:12px">
+   <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+     <rect width="16" height="10" fill="#006a4e"/>
+     <circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+   </svg>
 
-  <div class="k-note" style="line-height:1.6;font-size:15px;color:#111;">
-    <h3 style="margin:0 0 10px;font-weight:700;color:#1f4b85;"> 왜 방글라데시 비자는 ‘코반투어’일까?</h3>
+   <div class="k-note" style="line-height:1.6;font-size:15px;color:#111;">
+     <h3 style="margin:0 0 10px;font-weight:700;color:#1f4b85;"> 왜 방글라데시 비자는 ‘코반투어’일까?</h3>
 
-    <p><strong>💰 업계 최저가:</strong> 코반투어는 방글라데시 비자 신청 <b>업계 최저 가격</b>을 유지하고 있습니다.<br>
-    대사관 납부비용까지 모두 포함된 <b>투명한 금액</b>, 숨겨진 추가비용이 없습니다.</p>
+     <p><strong>💰 업계 최저가:</strong> 코반투어는 방글라데시 비자 신청 <b>업계 최저 가격</b>을 유지하고 있습니다.<br>
+     대사관 납부비용까지 모두 포함된 <b>투명한 금액</b>, 숨겨진 추가비용이 없습니다.</p>
 
-    <p><strong>🧭 전문성과 현지 네트워크:</strong> 코반투어의 모기업 <b>‘코반(KORBAN Consulting)’</b>은
-    방글라데시 정부 및 기업과 <b>ODA·컨설팅 프로젝트를 직접 수행</b>하는 전문기업입니다. 단순 여행사가 아닌 <br>
-      <b>현지 정부·기업 네트워크 기업</b>으로 실제 행정·비자 절차를 가장 잘 이해합니다.</p>
+     <p><strong>🧭 전문성과 현지 네트워크:</strong> 코반투어의 모기업 <b>‘코반(KORBAN Consulting)’</b>은
+     방글라데시 정부 및 기업과 <b>ODA·컨설팅 프로젝트를 직접 수행</b>하는 전문기업입니다. 단순 여행사가 아닌 <br>
+       <b>현지 정부·기업 네트워크 기업</b>으로 실제 행정·비자 절차를 가장 잘 이해합니다.</p>
 
-    <p><strong>🤝 신뢰성과 협력:</strong> 코반투어는 <b>방글라데시 비자만 전문적으로 취급</b>하며,
-    여러 기관·법인과의 <b>지속적인 파트너십</b>을 통해 안정적인 프로세스를 구축했습니다.</p>
+     <p><strong>🤝 신뢰성과 협력:</strong> 코반투어는 <b>방글라데시 비자만 전문적으로 취급</b>하며,
+     여러 기관·법인과의 <b>지속적인 파트너십</b>을 통해 안정적인 프로세스를 구축했습니다.</p>
 
-    <p><strong>🌍 원스톱 지원:</strong> 비자->항공권->공항 픽업->숙박->렌트카/운전사 및 경호인력->미팅어렌지->통번역->컨설팅->방글라데시 행정,회계 대행 등 —
-    <b>방글라데시 진출에 필요한 모든 서비스를 원스톱으로 지원</b>합니다.</p>
+     <p><strong>🌍 원스톱 지원:</strong> 비자->항공권->공항 픽업->숙박->렌트카/운전사 및 경호인력->미팅어렌지->통번역->컨설팅->방글라데시 행정,회계 대행 등 —
+     <b>방글라데시 진출에 필요한 모든 서비스를 원스톱으로 지원</b>합니다.</p>
 
-    <hr style="margin:16px 0;border:none;border-top:1px solid #ddd;">
+     <hr style="margin:16px 0;border:none;border-top:1px solid #ddd;">
 
-   
+    
 
-    <p>
-    코반은 현지에서 직접 <b>살아보고, 사업하고, 부딪혀본 전문가들</b>과 함께합니다.<br>
-    “왜 그렇게 어려운 나라냐”는 질문에, <b>직접 경험으로 답할 수 있는 한국 기업</b>입니다.</p>
+     <p>
+     코반은 현지에서 직접 <b>살아보고, 사업하고, 부딪혀본 전문가들</b>과 함께합니다.<br>
+     “왜 그렇게 어려운 나라냐”는 질문에, <b>직접 경험으로 답할 수 있는 한국 기업</b>입니다.</p>
 
-   
-  </div>
+    
+   </div>
+ </div>
 </div>
-</div>
 
-
+ 
 <!-- 입국정보 -->
 <div id="k-tab-entry" class="k-pane" role="tabpanel">
-<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
-  <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
-  </svg>
-  <h3 style="font-weight:800;color:#1f4b85;font-size:20px;margin:0;">방글라데시 입국 및 안전 안내</h3>
+ <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+   <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+     <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+   </svg>
+   <h3 style="font-weight:800;color:#1f4b85;font-size:20px;margin:0;">방글라데시 입국 및 안전 안내</h3>
+ </div>
+
+ <div class="k-entry-info" style="font-family:'Noto Sans KR',sans-serif;line-height:1.65;color:#374151">
+   
+   <!-- 1️⃣ 검역 정보 -->
+   <div style="background:#fff3cd;border:1px solid #ffeeba;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
+     🔸 <strong>2025년 10월 1일 기준</strong>, <b>방글라데시가 중점검역관리지역</b>으로 지정되었습니다.<br/>
+     방글라데시 출발 → 한국 입국 시 반드시 <strong>Q-Code 검역정보 제출</strong>이 필요합니다.<br/>
+     (<a href="https://blog.naver.com/korbangroup/224050085068" target="_blank" rel="noopener" style="color:#1f4b85;">그래서 어떻게 하나요?</a>)
+   </div>
+
+   <!-- 2️⃣ 건강 정보 -->
+   <div style="background:#fef9f9;border:1px solid #fecaca;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
+     🦟 <strong>뎅기열 감염 주의 안내</strong> (주방글라데시대사관, 2025.10.05)<br/>
+     2025년 10월 기준, 방글라데시 내 <strong>뎅기열 감염자 48,865명</strong>, <strong>사망자 203명</strong> 보고.<br/>
+     고열·두통·근육통·피부 발진 시 즉시 전문의 상담 권장.<br/>
+     ⚠️ <b>아스피린·이부프로펜 계열 약물은 복용 금지</b> — 출혈 위험.<br/>
+     대신 타이레놀(아세트아미노펜) 계열 약물 복용 권장.<br/>
+     <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
+       🏨 한국어 가능 직원 상주 방글라데시 코반 숙소 문의
+     </a>
+   </div>
+
+   <!-- 3️⃣ 치안 정보 -->
+  <div style="background:#f8fafc;border:1px solid #cbd5e1;padding:14px 18px;border-radius:10px; line-height: 1.6; color: #333;">
+   🚨 <strong>12월 긴급 치안 모니터링 및 정세 분석 (12.19~22)</strong><br/>
+   2026년 총선을 앞두고 <b>정치적 충돌 및 치안 부재 상황</b>이 심각합니다. 다카 시내 및 인파 밀집 지역 방문 시 각별한 주의가 요구됩니다.<br/><br/>
+   
+   <strong>① 정치적 유혈 충돌 위기</strong><br/>
+   ▫ 전 총리(하시나) 사형 선고 vs 야당 지도자(타리크 라흐만) 12/25 귀국<br/>
+   ▫ 지지 세력 간 대규모 시위 예상, <b>12월 25일 전후 이동 자제</b><br/><br/>
+   
+   <strong>② 무차별 '군중 심리(Mob Justice)' 범죄</strong><br/>
+   ▫ 마이멘싱 힌두교도 집단 린치, 방화로 인한 아동 사망 등 민간인 피해 속출<br/>
+   ▫ 종교/정치적 시위 현장 및 군중이 모인 곳은 <b>즉시 이탈 필수</b><br/><br/>
+   
+   <strong>③ 다카 시내 총격 및 테러</strong><br/>
+   ▫ 혁명 주역 학생 지도자(하디 등) 연쇄 총격 피살 발생<br/>
+   ▫ 공권력 약화로 인한 우발적 테러 위험, <b>야간 외출 절대 금지</b><br/>
+
+     <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
+       🚗 안전한 코반 공항 에스코트(의전), 공항 픽업·운전사·렌트카·경호 문의
+     </a>
+   </div>
+ </div>
 </div>
 
-<div class="k-entry-info" style="font-family:'Noto Sans KR',sans-serif;line-height:1.65;color:#374151">
-  
-  <!-- 1️⃣ 검역 정보 -->
-  <div style="background:#fff3cd;border:1px solid #ffeeba;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
-    🔸 <strong>2025년 10월 1일 기준</strong>, <b>방글라데시가 중점검역관리지역</b>으로 지정되었습니다.<br/>
-    방글라데시 출발 → 한국 입국 시 반드시 <strong>Q-Code 검역정보 제출</strong>이 필요합니다.<br/>
-    (<a href="https://blog.naver.com/korbangroup/224050085068" target="_blank" rel="noopener" style="color:#1f4b85;">그래서 어떻게 하나요?</a>)
-  </div>
-
-  <!-- 2️⃣ 건강 정보 -->
-  <div style="background:#fef9f9;border:1px solid #fecaca;padding:14px 18px;border-radius:10px;margin-bottom:22px;">
-    🦟 <strong>뎅기열 감염 주의 안내</strong> (주방글라데시대사관, 2025.10.05)<br/>
-    2025년 10월 기준, 방글라데시 내 <strong>뎅기열 감염자 48,865명</strong>, <strong>사망자 203명</strong> 보고.<br/>
-    고열·두통·근육통·피부 발진 시 즉시 전문의 상담 권장.<br/>
-    ⚠️ <b>아스피린·이부프로펜 계열 약물은 복용 금지</b> — 출혈 위험.<br/>
-    대신 타이레놀(아세트아미노펜) 계열 약물 복용 권장.<br/>
-    <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
-      🏨 한국어 가능 직원 상주 방글라데시 코반 숙소 문의
-    </a>
-  </div>
-
-  <!-- 3️⃣ 치안 정보 -->
-  <div style="background:#f8fafc;border:1px solid #cbd5e1;padding:14px 18px;border-radius:10px;">
-    🚨 <strong>가지푸르(Gazipur) 지역 강력범죄 급증 관련 유의</strong> (주방글라데시대사관, 2025.08.17)<br/>
-    가지푸르 일대에서 강력범죄가 급증 중이며, <b>공항~가지푸르 BRT 공사 구간</b> 등은 위험 지역으로 지정되었습니다.<br/>
-    ▫ 외출 시 귀중품 최소화, 현금·야간 외출 자제<br/>
-    ▫ 차량 이동 시 위치 공유 금지 및 택시 이용 시 신원 확인<br/>
-    ▫ 현지 경찰·대사관 지침 준수 필수<br/>
-    <a href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#1f4b85;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
-      🚗 안전한 코반 공항 에스코트(의전), 공항 픽업·운전사·렌트카·경호 문의
-    </a>
-  </div>
-</div>
-</div>
-
-
-
-    <!-- 예약진행과정 (아이콘 포함) -->
-    <!-- ===== 예약진행과정 (번호 + 아이콘 + 카카오 채널 버튼) ===== -->
-<div id="k-tab-process" class="k-pane" role="tabpanel">
-  <style>
-      .k-steps{
-        display:grid; gap:14px;
-        grid-template-columns:repeat(4,1fr);
-      }
-      @media (max-width:1024px){ .k-steps{grid-template-columns:repeat(2,1fr);} }
-      @media (max-width:640px){ .k-steps{grid-template-columns:1fr;} }
-    
-      .k-step{
-        background:#fff; border:1px solid var(--line); border-radius:14px;
-        padding:16px; display:flex; gap:12px; align-items:flex-start;
-        box-shadow:0 1px 2px rgba(0,0,0,.04);
-      }
-      .k-step .num{
-        min-width:28px; height:28px; border-radius:50%;
-        background:var(--brand-blue); color:#fff; font-weight:900; font-size:12px;
-        display:inline-flex; align-items:center; justify-content:center; margin-top:2px;
-      }
-      .k-step .head{display:flex; align-items:center; gap:8px; margin-bottom:6px}
-      .k-step h4{margin:0; font-size:15px; font-weight:900; color:#111827}
-      .k-step .ico{width:22px; height:22px; color:var(--brand-blue)}
-      .k-step p{margin:0; font-size:13.5px; color:#374151; line-height:1.6}
-    
-      /* 카카오 버튼 강조 */
-      .btn-kakao-mini{
-        display:inline-flex; align-items:center; gap:6px; margin-top:10px;
-        padding:9px 12px; border-radius:10px; background:#FEE500; color:#3C1E1E;
-        border:1px solid #e6d200; font-weight:800; font-size:12.5px; text-decoration:none;
-      }
-      .btn-kakao-mini svg{width:16px; height:16px}
-    
-      /* 구분 화살표 제거 */
-      .k-arrow{display:none}
-    
-      /* 주소/안내 박스 */
-      .k-tip{
-        margin-top:14px; background:#f9fafb; border:1px dashed var(--line);
-        border-radius:12px; padding:12px 14px; color:#374151; font-size:13.5px;
-      }
-      .k-tip b{font-weight:900; color:#111827}
-      .k-tip .addr{
-        display:block; margin-top:6px;
-        font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px;
-      }
-    
-      .k-note{margin-top:8px; color:#6b7280; font-size:12.5px}
-    </style>
-    
-
-  <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
-    <!-- 방글라데시 국기 -->
-    <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
-    </svg>
-    <h3 style="margin:0;font-size:16px;color:#111827">예약 진행 단계</h3>
-  </div>
 
  
-<div class="k-steps v2" role="list">
-  <!-- 1 -->
-  <div class="k-step card" role="listitem">
-    <span class="num">1</span>
-    <div>
-      <div class="head">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h2"></path>
-        </svg>
-        <h4>비자 신청 접수</h4>
-      </div>
-      <p>신청서 작성 → 카카오채널 전송</p>
-      <a class="btn-kakao-mini" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
-        </svg>
-        코반투어 카카오 채팅
-      </a>
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="k-step card" role="listitem">
-    <span class="num">2</span>
-    <div>
-      <div class="head">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-        <h4>여권 & 사진 제출</h4>
-      </div>
-      <p>여권 <b>원본</b>과 <b>여권 사진</b>을 <b>등기우편</b>으로 보내주세요.<br>※ 디지털 여권 사진 제공 시 <b>처리 속도↑</b></p>
-    </div>
-  </div>
-
-  <!-- 3 -->
-  <div class="k-step card" role="listitem">
-    <span class="num">3</span>
-    <div>
-      <div class="head">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
-        </svg>
-        <h4>비자 유형별 서류 제출</h4>
-      </div>
-      <p>신청 비자에 필요한 서류를 채널로 전송해 주세요.</p>
-    </div>
-  </div>
-
-  <!-- 4 -->
-  <div class="k-step card" role="listitem">
-    <span class="num">4</span>
-    <div>
-      <div class="head">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-          <path d="M3.27 6.96L12 12l8.73-5.04"></path><path d="M12 22V12"></path>
-        </svg>
-        <h4>비자 발급</h4>
-      </div>
-      <p>택배/방문 수령</p>
-    </div>
-  </div>
-</div>
-
-<!-- 주소 & 소요일 안내 -->
-<div class="k-tip" role="note" aria-label="발송 주소 및 소요일 안내">
-  <b>여권 보내실 곳</b>
-  <span class="addr">📍 서울특별시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호 (우)07631<br>
-  받는이: 코반 비자 담당자 앞 · 전화번호: 02-2658-4006</span>
-
-  <div class="k-note">
-    * 비자 발급 소요일: 일주일(서류·여권 도착 기준, 공휴일 포함)<br>
-    * 등기 수령: 발급 다음날 수령(등기 비용 별도)
-  </div>
-</div>
-</div>
-
-    </div>
+     <!-- 예약진행과정 (아이콘 포함) -->
+     <!-- ===== 예약진행과정 (번호 + 아이콘 + 카카오 채널 버튼) ===== -->
+ <div id="k-tab-process" class="k-pane" role="tabpanel">
   
-
-
-
-
-  <script>
-    // 탭 전환
-    (function(){
-      const btns = document.querySelectorAll('.k-info-tabs .tabbtn');
-      const panes = document.querySelectorAll('.k-info-tabs .k-pane');
-      btns.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          btns.forEach(b=>b.classList.remove('active'));
-          panes.forEach(p=>p.classList.remove('active'));
-          btn.classList.add('active');
-          document.getElementById('k-tab-' + btn.dataset.tab).classList.add('active');
-        });
-      });
-    })();
-  </script>
-</section>
+     
+ 
+   <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+     <!-- 방글라데시 국기 -->
+     <svg class="k-flag" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+       <rect width="16" height="10" fill="#006a4e"/><circle cx="7.2" cy="5" r="3" fill="#f42a41"/>
+     </svg>
+     <h3 style="margin:0;font-size:16px;color:#111827">예약 진행 단계</h3>
+   </div>
+ 
+  
+<div class="k-steps v2" role="list">
+   <!-- 1 -->
+   <div class="k-step card" role="listitem">
+     <span class="num">1</span>
+     <div>
+       <div class="head">
+         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+           <rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h2"></path>
+         </svg>
+         <h4>비자 신청 접수</h4>
+       </div>
+       <p>신청서 작성 → 카카오채널 전송</p>
+       <a class="btn-kakao-mini" href="https://pf.kakao.com/_LUDdG/chat" target="_blank" rel="noopener">
+         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+           <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+         </svg>
+         코반투어 카카오 채팅
+       </a>
+     </div>
+   </div>
+ 
+   <!-- 2 -->
+   <div class="k-step card" role="listitem">
+     <span class="num">2</span>
+     <div>
+       <div class="head">
+         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+           <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/>
+           <circle cx="12" cy="9" r="2.5"/>
+         </svg>
+         <h4>여권 & 사진 제출</h4>
+       </div>
+       <p>여권 <b>원본</b>과 <b>여권 사진</b>을 <b>등기우편</b>으로 보내주세요.<br><br>※여권 커버 <b>제거 후 </b> 보내주세요. <br>※ 디지털 여권 사진 제공 시 <b>처리 속도↑</b></p>
+     </div>
+   </div>
+ 
+   <!-- 3 -->
+   <div class="k-step card" role="listitem">
+     <span class="num">3</span>
+     <div>
+       <div class="head">
+         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+           <path d="M12 2C6.48 2 2 6.03 2 10.93c0 2.92 1.66 5.49 4.24 7.13L5.1 22l4.74-2.61c.68.12 1.39.19 2.13.19 5.52 0 10-4.03 10-8.93S17.52 2 12 2z"/>
+         </svg>
+         <h4>비자 유형별 서류 제출</h4>
+       </div>
+       <p>신청 비자에 필요한 서류를 채널로 전송해 주세요.</p>
+     </div>
+   </div>
+ 
+   <!-- 4 -->
+   <div class="k-step card" role="listitem">
+     <span class="num">4</span>
+     <div>
+       <div class="head">
+         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+           <path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+           <path d="M3.27 6.96L12 12l8.73-5.04"></path><path d="M12 22V12"></path>
+         </svg>
+         <h4>비자 발급</h4>
+       </div>
+       <p>택배/방문 수령</p>
+     </div>
+   </div>
+ </div>
+ 
+ <!-- 주소 & 소요일 안내 -->
+ <div class="k-tip" role="note" aria-label="발송 주소 및 소요일 안내">
+   <b>여권 보내실 곳</b>
+   <span class="addr">📍 서울특별시 강서구 마곡중앙2로 15, 마곡테크노타워2 610호 (우)07631<br>
+   받는이: 코반 비자 담당자 앞 · 전화번호: 02-2658-4006</span>
+ 
+   <div class="k-note">
+     * 여권 커버 제거 후 배송 요망<br>
+     * 비자 발급 소요일: 일주일(서류·여권 도착 기준, 공휴일 포함)<br>
+     * 등기 수령: 발급 다음날 수령(등기 비용 별도) <br>
+     
+   </div>
+ </div>
+ </div>
+ 
+     </div>
+   
+ 
+   <script>
+     // 탭 전환
+     (function(){
+       const btns = document.querySelectorAll('.k-info-tabs .tabbtn');
+       const panes = document.querySelectorAll('.k-info-tabs .k-pane');
+       btns.forEach(btn=>{
+         btn.addEventListener('click', ()=>{
+           btns.forEach(b=>b.classList.remove('active'));
+           panes.forEach(p=>p.classList.remove('active'));
+           btn.classList.add('active');
+           document.getElementById('k-tab-' + btn.dataset.tab).classList.add('active');
+         });
+       });
+     })();
+   </script>
+ </section>
 <!-- ========= /방글라데시비자 정보 탭 ========= -->
 
 
@@ -546,40 +1222,40 @@ overflow: visible !important;
 <article class="k-prod"
   data-sku="tourist"
   data-name="관광비자"
-  data-price="100000"
+  data-price="104000"
   data-valid="6개월"
   data-stay="30일"
   data-proc="6박7일"
 >
   <h4>관광비자</h4>
   <div class="k-fe">유효 6개월 · 체류 30일</div>
-  <div class="k-price">₩100,000</div>
+  <div class="k-price">₩104,000</div>
 </article>
 
 <article class="k-prod"
   data-sku="biz-single"
   data-name="비즈니스 단수"
-  data-price="100000"
+  data-price="104000"
   data-valid="90일"
   data-stay="(케이스별 상이)"
   data-proc="6박7일"
 >
   <h4>비즈니스 단수</h4>
   <div class="k-fe">유효 90일 · 1회 입국</div>
-  <div class="k-price">₩100,000</div>
+  <div class="k-price">₩104,000</div>
 </article>
 
 <article class="k-prod"
   data-sku="biz-multi"
   data-name="비즈니스 복수"
-  data-price="130000"
+  data-price="134000"
   data-valid="6–7개월"
   data-stay="(케이스별 상이)"
   data-proc="6박7일"
 >
   <h4>비즈니스 복수</h4>
   <div class="k-fe">유효 6–7개월 · 복수입국</div>
-  <div class="k-price">₩130,000</div>
+  <div class="k-price">₩134,000</div>
 </article>
 </div>
 
@@ -778,9 +1454,9 @@ overflow: visible !important;
     <!-- ✅ 신청 비자 종류 셀렉트: 제목 옆으로 이동 -->
     <select class="kaf-select kaf-select-compact" id="f-visa">
       <option value="">신청 비자 종류 선택</option>
-      <option value="tourist"   data-price="100000">관광비자 (₩100,000)</option>
-      <option value="bizSingle" data-price="100000">비즈니스 단수 (₩100,000)</option>
-      <option value="bizMulti"  data-price="130000">비즈니스 복수 (₩130,000)</option>
+      <option value="tourist"   data-price="104000">관광비자 (₩104,000)</option>
+      <option value="bizSingle" data-price="104000">비즈니스 단수 (₩104,000)</option>
+      <option value="bizMulti"  data-price="134000">비즈니스 복수 (₩134,000)</option>
     </select>
 
     <!-- 신청자와 동일 체크 -->
@@ -1903,9 +2579,9 @@ if (window.KORBAN_updateSummary) {
 (function(){
 // 가격표(원)
 const VISA = {
-  tourist:   { name: "관광비자",      price: 100000 },
-  bizSingle: { name: "비즈니스 단수", price: 100000 },
-  bizMulti:  { name: "비즈니스 복수", price: 130000 }
+  tourist:   { name: "관광비자",      price: 104000 },
+  bizSingle: { name: "비즈니스 단수", price: 104000 },
+  bizMulti:  { name: "비즈니스 복수", price: 134000 }
 };
 const SHIP_FEE = 5000; // 우체국 익일특급 1회
 
@@ -1950,9 +2626,9 @@ return `
         
         <select class="kaf-select kaf-select-compact f-visa">
           <option value="">신청 비자 종류 선택</option>
-          <option value="tourist"   ${a.visa==='tourist'?'selected':''}>관광비자 (₩100,000)</option>
-          <option value="bizSingle" ${a.visa==='bizSingle'?'selected':''}>비즈니스 단수 (₩100,000)</option>
-          <option value="bizMulti"  ${a.visa==='bizMulti'?'selected':''}>비즈니스 복수 (₩130,000)</option>
+          <option value="tourist"   ${a.visa==='tourist'?'selected':''}>관광비자 (₩104,000)</option>
+          <option value="bizSingle" ${a.visa==='bizSingle'?'selected':''}>비즈니스 단수 (₩104,000)</option>
+          <option value="bizMulti"  ${a.visa==='bizMulti'?'selected':''}>비즈니스 복수 (₩134,000)</option>
         </select>
 
 
